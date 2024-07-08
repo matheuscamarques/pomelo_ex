@@ -53,7 +53,7 @@ defmodule PomeloEx.General.Company do
   status
   """
   alias PomeloEx.General.Company.SearchCompanies
-  defdelegate search_companies, to: SearchCompanies, as: :execute
+  defdelegate search_companies(payload), to: SearchCompanies, as: :execute
 
   @doc """
   Get Company
