@@ -12,5 +12,8 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit do
     as: :execute
 
   defdelegate get_associations(payload), to: GetAssociations, as: :execute
-  defdelegate get_association_by_credit_line, to: GetAssociationsByCreditLine, as: :execute
+
+  defdelegate get_association_by_credit_line(payload),
+    to: GetAssociationsByCreditLine,
+    as: :execute
 end
