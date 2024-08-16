@@ -21,7 +21,7 @@ defmodule PomeloEx.Cards.Credits.CreditLines do
 
   defdelegate cancel_credit_line(payload), to: CancelCreditLine, as: :execute
   defdelegate create_credit_line(payload), to: CreateCreditLine, as: :execute
-  defdelegate create_price_update(payload), to: CreatePriceUpdate
+  defdelegate create_price_update(payload), to: CreatePriceUpdate, as: :execute
   defdelegate create_product(payload), to: CreateProduct, as: :execute
   defdelegate deactivating_product(payload), to: DeactivatingProduct, as: :execute
   defdelegate get_credit_line(payload), to: GetCreditLine, as: :execute
