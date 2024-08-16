@@ -13,6 +13,7 @@ defmodule PomeloEx.Cards.Issuing.Cards do
   alias PomeloEx.Cards.Issuing.Cards.CreateBatchInnominateCards
   alias PomeloEx.Cards.Issuing.Cards.CardEvents
   alias PomeloEx.Cards.Issuing.Cards.ActivateCard
+  alias PomeloEx.Cards.Issuing.Cards.CreateCard
 
   defdelegate activate_card(payload), to: ActivateCard, as: :execute
   defdelegate card_events(payload), to: CardEvents, as: :execute
@@ -28,4 +29,5 @@ defmodule PomeloEx.Cards.Issuing.Cards do
   defdelegate update_card_batch_shipping(payload), to: UpdateCardBatchShipping, as: :execute
   defdelegate update_card_shipping(payload), to: UpdateCardShipping, as: :execute
   defdelegate update_card(payload), to: UpdateCard, as: :execute
+  defdelegate create_card(payload), to: CreateCard, as: :execute
 end
