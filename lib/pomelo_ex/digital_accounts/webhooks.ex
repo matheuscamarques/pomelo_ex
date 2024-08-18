@@ -11,7 +11,10 @@ defmodule PomeloEx.DigitalAccounts.Webhooks do
   You can also find more information about the [Verification Process](https://docs.pomelo.la/docs/developers/key-exchange) of the digital signature.
   """
 
+  @doc """
+  Activity notification
+  The following endpoint must be in the client service so that it can receive the requests of the activities created/updated. If the request returns an HTTP code of type 2xx, it will not be sent again and will be marked as Sent correctly. Otherwise, we will try again.
+  """
   alias PomeloEx.DigitalAccounts.Webhooks.ActivityNotification
-
   defdelegate activity_notification(payload), to: ActivityNotification, as: :execute
 end
