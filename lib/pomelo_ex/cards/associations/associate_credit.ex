@@ -3,17 +3,30 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit do
   This service allows you to associate a line of credit with a specific credit card.
   """
 
+  @doc """
+  Associate Card with Line of Credit
+  To associate a card you must activate it previously (see [Activate Card](https://developers.pomelo.la/en/api-reference/cards/issuing/cards#activate-card)). This does not apply to virtual cards, which are active from the moment of creation. For a successful association, the Line of Credit offer must be eligible..
+  """
   alias PomeloEx.Cards.Associations.AssociateCredit.AssociateCardWithLineOfCredit
-  alias PomeloEx.Cards.Associations.AssociateCredit.GetAssociations
-  alias PomeloEx.Cards.Associations.AssociateCredit.GetAssociationsByCreditLine
 
   defdelegate associate_card_with_line_of_credit(payload),
     to: AssociateCardWithLineOfCredit,
     as: :execute
 
-  defdelegate get_associations(payload), to: GetAssociations, as: :execute
+  @doc """
+  Get associations between Cards and Credit Lines
+  You will be able to check the associations by credit_line_id
+  """
+  alias PomeloEx.Cards.Associations.AssociateCredit.GetAssociationsByCreditLine
 
   defdelegate get_association_by_credit_line(payload),
     to: GetAssociationsByCreditLine,
     as: :execute
+
+  @doc """
+  Obtain associations between Cards and Credit Lines given an association id
+  You will be able to check the associations by association id
+  """
+  alias PomeloEx.Cards.Associations.AssociateCredit.GetAssociations
+  defdelegate get_associations(payload), to: GetAssociations, as: :execute
 end
