@@ -25,29 +25,53 @@ defmodule PomeloEx.Cards.Credits.Webhooks do
   validSignature = requestSignature == recreatedSignature
   """
 
-  alias PomeloEx.Cards.Credits.Webhooks.CreatedSummariesNotifications
-  alias PomeloEx.Cards.Credits.Webhooks.CreditLinePauseUnpauseNotifications
-  alias PomeloEx.Cards.Credits.Webhooks.EntryExitFromArrearsUserNotifications
+  @doc """
+  Notifications of processed transactions
+  You must inform us of this endpoint to receive notifications of processed transactions. You must return a type 2xx HTTP code so that the notification is not sent again. Otherwise, we will send it again.
+  """
   alias PomeloEx.Cards.Credits.Webhooks.ProcessedTransactionsNotifications
-  alias PomeloEx.Cards.Credits.Webhooks.ReversedTransactionsNotifications
-
-  defdelegate created_summaries_notifications(payload),
-    to: CreatedSummariesNotifications,
-    as: :execute
-
-  defdelegate credit_line_pause_unpause_notifications(payload),
-    to: CreditLinePauseUnpauseNotifications,
-    as: :execute
-
-  defdelegate entry_exit_from_arrears_user_notifications(payload),
-    to: EntryExitFromArrearsUserNotifications,
-    as: :execute
 
   defdelegate processed_transactions_notifications(payload),
     to: ProcessedTransactionsNotifications,
     as: :execute
 
+  @doc """
+  Reversed transaction notifications
+  You must inform us of this endpoint to receive notifications of processed transactions. You must return a type 2xx HTTP code so that the notification is not sent again. Otherwise, we will send it again.
+  """
+  alias PomeloEx.Cards.Credits.Webhooks.ReversedTransactionsNotifications
+
   defdelegate reversed_transactions_notifications(payload),
     to: ReversedTransactionsNotifications,
+    as: :execute
+
+  @doc """
+  Credit line pause/unpause notifications
+  You must inform us of this endpoint to receive notifications of processed transactions. You must return a type 2xx HTTP code so that the notification is not sent again. Otherwise, we will send it again.
+  """
+  alias PomeloEx.Cards.Credits.Webhooks.CreditLinePauseUnpauseNotifications
+
+  defdelegate credit_line_pause_unpause_notifications(payload),
+    to: CreditLinePauseUnpauseNotifications,
+    as: :execute
+
+  @doc """
+  Notifications of entry or exit from arrears of a user
+  You must indicate this endpoint to receive notifications of a user entering or leaving arrears. You must return an HTTP code of the type 2xx so that we do not send the notification again. Otherwise, we will send it again.
+  """
+  alias PomeloEx.Cards.Credits.Webhooks.EntryExitFromArrearsUserNotifications
+
+  defdelegate entry_exit_from_arrears_user_notifications(payload),
+    to: EntryExitFromArrearsUserNotifications,
+    as: :execute
+
+  @doc """
+  Notifications of created summaries
+  You will have to indicate this endpoint to receive the notifications of created summaries. You must return a type 2xx HTTP code so that the notification is not sent again Otherwise, we will send it again.
+  """
+  alias PomeloEx.Cards.Credits.Webhooks.CreatedSummariesNotifications
+
+  defdelegate created_summaries_notifications(payload),
+    to: CreatedSummariesNotifications,
     as: :execute
 end
