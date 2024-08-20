@@ -3,6 +3,10 @@ defmodule PomeloEx.General.Users do
   Users
   The Users API contains all the endpoints needed to manage the user bases. You can use it to create, update or even search for users within certain parameters.
   """
+  alias PomeloEx.General.Users.CreateUser
+  alias PomeloEx.General.Users.GetUser
+  alias PomeloEx.General.Users.ModifyUser
+  alias PomeloEx.General.Users.SearchUser
 
   @doc """
   Create user
@@ -140,7 +144,6 @@ defmodule PomeloEx.General.Users do
   For Chile
   In case the operating country is Chile, there are no special requirements regarding the user's legal address fields.
   """
-  alias PomeloEx.General.Users.CreateUser
   defdelegate create_user(payload), to: CreateUser, as: :execute
 
   @doc """
@@ -166,14 +169,12 @@ defmodule PomeloEx.General.Users do
   status
   If a parameter is incorrect or misspelled, it will return an error.
   """
-  alias PomeloEx.General.Users.SearchUser
   defdelegate search_user(payload), to: SearchUser, as: :execute
 
   @doc """
   Get user
   The /users/v1/{id} endpoint allows you to query a user’s information through their user_id.
   """
-  alias PomeloEx.General.Users.GetUser
   defdelegate get_user(payload), to: GetUser, as: :execute
 
   @doc """
@@ -303,6 +304,5 @@ defmodule PomeloEx.General.Users do
   For Chile
   In case the operating country is Chile, there are no special requirements regarding the user's legal address fields.
   """
-  alias PomeloEx.General.Users.ModifyUser
   defdelegate modify_user(payload), to: ModifyUser, as: :execute
 end
