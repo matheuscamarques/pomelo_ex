@@ -30,12 +30,20 @@ defmodule PomeloEx.Identity.Webhooks do
   validSignature = requestSignature == 'hmac-sha256 ' + recreatedSignature
   """
 
-  alias PomeloEx.Identity.Webhooks.RequiredFileNotification
+  @doc """
+  Validation session notifications
+  You must inform us of this endpoint to receive notifications of an identity validation session. You must return a type 2xx HTTP code so that the notification is not sent again Otherwise, we will send it again.
+  """
   alias PomeloEx.Identity.Webhooks.ValidationSessionNotifications
-
-  defdelegate required_file_notification(payload), to: RequiredFileNotification, as: :execute
 
   defdelegate validation_session_notifications(payload),
     to: ValidationSessionNotifications,
     as: :execute
+
+  @doc """
+  Notification of required file
+  Please provide us with this endpoint to receive notifications for required files. You must return us an HTTP code in the 2xx range to prevent us from resending the notification. Otherwise, we will send it again.
+  """
+  alias PomeloEx.Identity.Webhooks.RequiredFileNotification
+  defdelegate required_file_notification(payload), to: RequiredFileNotification, as: :execute
 end
