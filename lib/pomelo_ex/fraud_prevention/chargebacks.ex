@@ -17,6 +17,10 @@ defmodule PomeloEx.FraudPrevention.Chargebacks do
     - DISPUTE_NOT_PROCESSED: No pudimos procesar el contracargo dadas las características del pago.
     - TRANSACTION_NOT_PRESENTED: La transacción aún no ha sido presentada por el adquirente, por lo que no es posible solicitar un contracargo.
   """
+  alias PomeloEx.FraudPrevention.Chargebacks.AttachFileToChargeback
+  alias PomeloEx.FraudPrevention.Chargebacks.CreateChargeback
+  alias PomeloEx.FraudPrevention.Chargebacks.FindChargebacks
+  alias PomeloEx.FraudPrevention.Chargebacks.ObtainChargeback
 
   @doc """
   Create chargeback
@@ -32,7 +36,6 @@ defmodule PomeloEx.FraudPrevention.Chargebacks do
   Considerations
   When creating a chargeback of type CONTROVERSY, we can add attachments to support the dispute. For this, use the resource /chargebacks/v2/{chargebackId}/attachments
   """
-  alias PomeloEx.FraudPrevention.Chargebacks.CreateChargeback
   defdelegate create_chargeback(payload), to: CreateChargeback, as: :execute
 
   @doc """
@@ -46,7 +49,6 @@ defmodule PomeloEx.FraudPrevention.Chargebacks do
   How to attach the file?
   The file must be attached in the request body as a multipart/form-data, under the fileUpload key.
   """
-  alias PomeloEx.FraudPrevention.Chargebacks.AttachFileToChargeback
   defdelegate attach_file_to_chargeback(payload), to: AttachFileToChargeback, as: :execute
 
   @doc """
@@ -68,13 +70,11 @@ defmodule PomeloEx.FraudPrevention.Chargebacks do
 
   The default sorting will be ascending. To specify a descending sorting, you must send the character '-' as a prefix of the attribute. For example: ?sort=status,-created_at
   """
-  alias PomeloEx.FraudPrevention.Chargebacks.FindChargebacks
   defdelegate find_chargebacks(payload), to: FindChargebacks, as: :execute
 
   @doc """
   Obtain chargeback
   Returns a chargeback with the Identifier given by parameter
   """
-  alias PomeloEx.FraudPrevention.Chargebacks.ObtainChargeback
   defdelegate obtain_chargeback(payload), to: ObtainChargeback, as: :execute
 end
