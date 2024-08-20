@@ -2,19 +2,24 @@ defmodule PomeloEx.Identity.KYB do
   @moduledoc """
   The Identity service lets you manage the onboarding process of companies, partners and employees in a flexible and simple manner, confirming their identity and preventing fraud.
   """
+  alias PomeloEx.Identity.KYB.CancelSession
+  alias PomeloEx.Identity.KYB.CreateSession
+  alias PomeloEx.Identity.KYB.CreateSessionAdditional
+  alias PomeloEx.Identity.KYB.GetSession
+  alias PomeloEx.Identity.KYB.ObtainingSessionReport
+  alias PomeloEx.Identity.KYB.SearchSession
+  alias PomeloEx.Identity.KYB.UploadFile
 
   @doc """
   Create session
   The identity/v2/sessions endpoint allows you to create a new identity validation session for Legal Entities, based on one of our validation flows, and returns a unique identifier for it.
   """
-  alias PomeloEx.Identity.KYB.CreateSession
   defdelegate create_session(payload), to: CreateSession, as: :execute
 
   @doc """
   Create session - Additional
   The identity/v2/sessions endpoint allows you to create a new identity validation session for natural persons (employee), associated with the Company which was previously validated.
   """
-  alias PomeloEx.Identity.KYB.CreateSessionAdditional
   defdelegate create_session_additional(payload), to: CreateSessionAdditional, as: :execute
 
   @doc """
@@ -41,28 +46,24 @@ defmodule PomeloEx.Identity.KYB do
     - driver-license-back: backside photo of the driver's license.
     - company-document: Articles of incorporation, statute, subscription bulletin, Articles of incorporation with sworn translation or updated document with a registration that proves the constitution of the company.
   """
-  alias PomeloEx.Identity.KYB.UploadFile
   defdelegate upload_file(payload), to: UploadFile, as: :execute
 
   @doc """
   Cancel Session
   The identity/v1/sessions/{session_id} endpoint lets you cancel an identity validation session.
   """
-  alias PomeloEx.Identity.KYB.CancelSession
   defdelegate cancel_session(payload), to: CancelSession, as: :execute
 
   @doc """
   Get session
   The identity/v1/session/{session_id} endpoint lets you get data from an identity validation session.
   """
-  alias PomeloEx.Identity.KYB.GetSession
   defdelegate get_session(payload), to: GetSession, as: :execute
 
   @doc """
   Obtaining a Session Report
   The identity/v1/sessions/{session_id}/report endpoint lets you obtain the data collected from company in an identity validation session.
   """
-  alias PomeloEx.Identity.KYB.ObtainingSessionReport
   defdelegate obtaining_session_report(payload), to: ObtainingSessionReport, as: :execute
 
   @doc """
@@ -72,6 +73,5 @@ defmodule PomeloEx.Identity.KYB do
   Date range#
   There is a filter for the created_at field, which can be used to get sessions created within a date range. For example: filter[created_at][from]=2021-07-27&filter[created_at][to]=2021-07-28
   """
-  alias PomeloEx.Identity.KYB.SearchSession
   defdelegate search_session(payload), to: SearchSession, as: :execute
 end
