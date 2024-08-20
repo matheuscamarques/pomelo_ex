@@ -2,6 +2,8 @@ defmodule PomeloEx.Cards.Processing.Summaries do
   @moduledoc """
   The Statements API is only available for credit cards issued in Argentina and for those who have not implemented the Credits solution, which means they have not contracted the lending engine
   """
+  alias PomeloEx.Cards.Processing.Summaries.CalculateTaxes
+  alias PomeloEx.Cards.Processing.Summaries.RetrieveTaxes
 
   @doc """
   Calculate Taxes
@@ -10,7 +12,6 @@ defmodule PomeloEx.Cards.Processing.Summaries do
   Considerations
   Please specify the card's public ID and the period for which taxes will be calculated
   """
-  alias PomeloEx.Cards.Processing.Summaries.CalculateTaxes
   defdelegate calculate_taxes(payload), to: CalculateTaxes, as: :execute
 
   @doc """
@@ -20,6 +21,5 @@ defmodule PomeloEx.Cards.Processing.Summaries do
   Considerations#
   Please provide the statement_id corresponding to the billing period for which you wish to obtain the applied taxes.
   """
-  alias PomeloEx.Cards.Processing.Summaries.RetrieveTaxes
   defdelegate retrieve_taxes(payload), to: RetrieveTaxes, as: :execute
 end
