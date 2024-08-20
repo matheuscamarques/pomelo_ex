@@ -7,6 +7,13 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
 
   In that case, the affinity groups will reflect the settings you have chosen. Also, when creating a card or a batch of cards, we will return an identifier in the shipment_id field, which we recommend you store in your integration, since you will need it for pick-up. The cards will be available for pick-up at the embossing facility specified in integration.
   """
+  alias PomeloEx.Cards.Issuing.Shipments.ChangeShipmentData
+  alias PomeloEx.Cards.Issuing.Shipments.CreateShipment
+  alias PomeloEx.Cards.Issuing.Shipments.GetShipment
+  alias PomeloEx.Cards.Issuing.Shipments.GetShipmentHistory
+  alias PomeloEx.Cards.Issuing.Shipments.RequestReceiverData
+  alias PomeloEx.Cards.Issuing.Shipments.SearchShipment
+  alias PomeloEx.Cards.Issuing.Shipments.ShipmentNotifications
 
   @doc """
   Create Shipment
@@ -58,7 +65,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
   Envio de tarjetas innominadas desde deposito
   Puedes asociar un envío con el usuario al que le enviarás la tarjeta especificando el user_id en el body del shipment.
   """
-  alias PomeloEx.Cards.Issuing.Shipments.CreateShipment
   defdelegate create_shipment(payload), to: CreateShipment, as: :execute
 
   @doc """
@@ -74,7 +80,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
     - status_detail
     - created_at
   """
-  alias PomeloEx.Cards.Issuing.Shipments.SearchShipment
   defdelegate search_shipment(payload), to: SearchShipment, as: :execute
 
   @doc """
@@ -100,7 +105,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
     - REJECTED_UPDATE_ADDRESS: the carrier has rejected the shipment's address change.
   If your request is rejected, you will continue to see the original shipping address.
   """
-  alias PomeloEx.Cards.Issuing.Shipments.ChangeShipmentData
   defdelegate change_shipment_data(payload), to: ChangeShipmentData, as: :execute
 
   @doc """
@@ -115,7 +119,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
   Shipments to a warehouse and in Mexican territory:
   For shipments heading to a warehouse and for those within Mexico, we won't provide an external tracking ID. But no need to fret! We'll keep you updated on the shipment status through the [Dashboard](https://dashboard.pomelo.la/) and also [via webhooks](https://developers.pomelo.la/api-reference/cards/issuing/envios#novedades-de-los-envios).
   """
-  alias PomeloEx.Cards.Issuing.Shipments.GetShipment
   defdelegate get_shipment(payload), to: GetShipment, as: :execute
 
   @doc """
@@ -129,7 +132,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
 
   The list of events is ordered in ascending order by update date, i. e. the most recent status is at the end of the list.
   """
-  alias PomeloEx.Cards.Issuing.Shipments.GetShipmentHistory
   defdelegate get_shipment_history(payload), to: GetShipmentHistory, as: :execute
 
   @doc """
@@ -143,7 +145,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
     - We expect a response in the 2XX range to ensure that you've received the notification. Otherwise, we'll resend it.
   Find more information about the shipment status in [our documentation](https://docs.pomelo.la/docs/cards/issuing/delivery).
   """
-  alias PomeloEx.Cards.Issuing.Shipments.ShipmentNotifications
   defdelegate shipment_notifications(payload), to: ShipmentNotifications, as: :execute
 
   @doc """
@@ -160,6 +161,5 @@ defmodule PomeloEx.Cards.Issuing.Shipments do
     - MISSING_RECEIVER_DATA: The carrier could not share the shipment receiver data with us.
   To view the recipient's data of the card, interact again with the endpoint [Get shipment](https://developers.pomelo.la/en/api-reference/cards/issuing/shipments#get-shipping) and read the received_by field located within courier_additional_info.
   """
-  alias PomeloEx.Cards.Issuing.Shipments.RequestReceiverData
   defdelegate request_receiver_data(payload), to: RequestReceiverData, as: :execute
 end
