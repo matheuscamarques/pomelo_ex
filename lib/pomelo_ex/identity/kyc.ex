@@ -2,6 +2,13 @@ defmodule PomeloEx.Identity.KYC do
   @moduledoc """
   The Identity service lets you manage your users’ onboarding process in a flexible and simple manner, confirming their identity and preventing fraud.
   """
+  alias PomeloEx.Identity.KYC.CancelSession
+  alias PomeloEx.Identity.KYC.ClearUserTestEnvironment
+  alias PomeloEx.Identity.KYC.CreateSession
+  alias PomeloEx.Identity.KYC.GetSession
+  alias PomeloEx.Identity.KYC.ObtainingSessionReport
+  alias PomeloEx.Identity.KYC.SearchSession
+  alias PomeloEx.Identity.KYC.UploadFile
 
   @doc """
   Create session
@@ -10,7 +17,6 @@ defmodule PomeloEx.Identity.KYC do
   Consideration about the API integration method
   When this type of integration is used, the documents are uploaded with the following endpoint [Upload File](https://developers.pomelo.la/api-reference/Identity/kyc#subir-archivo).
   """
-  alias PomeloEx.Identity.KYC.CreateSession
   defdelegate create_session(payload), to: CreateSession, as: :execute
 
   @doc """
@@ -35,7 +41,6 @@ defmodule PomeloEx.Identity.KYC do
     - driver-license-front: Photo of the front of the driver's license.
     - driver-license-back: Photo of the back of the driver's license.
   """
-  alias PomeloEx.Identity.KYC.UploadFile
   defdelegate upload_file(payload), to: UploadFile, as: :execute
 
   @doc """
@@ -45,28 +50,24 @@ defmodule PomeloEx.Identity.KYC do
   Considerations
   You will have to specify the ID or document number of the user you want to clear. If you send them both, the user ID will be used as priority to clear data.
   """
-  alias PomeloEx.Identity.KYC.ClearUserTestEnvironment
   defdelegate clear_user_test_environment(payload), to: ClearUserTestEnvironment, as: :execute
 
   @doc """
   Cancel Session
   The identity/v1/sessions/{session_id} endpoint lets you cancel an identity validation session.
   """
-  alias PomeloEx.Identity.KYC.CancelSession
   defdelegate cancel_session(payload), to: CancelSession, as: :execute
 
   @doc """
   Get session
   The identity/v1/session/{session_id} endpoint lets you get data from an identity validation session.
   """
-  alias PomeloEx.Identity.KYC.GetSession
   defdelegate get_session(payload), to: GetSession, as: :execute
 
   @doc """
   Obtaining a Session Report
   The identity/v1/sessions/{session_id}/report endpoint lets you obtain a user's data collected in an identity validation session.
   """
-  alias PomeloEx.Identity.KYC.ObtainingSessionReport
   defdelegate obtaining_session_report(payload), to: ObtainingSessionReport, as: :execute
 
   @doc """
@@ -88,6 +89,5 @@ defmodule PomeloEx.Identity.KYC do
 
   If a parameter is incorrect or misspelled, it will return an error.
   """
-  alias PomeloEx.Identity.KYC.SearchSession
   defdelegate search_session(payload), to: SearchSession, as: :execute
 end

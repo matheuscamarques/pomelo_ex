@@ -7,6 +7,8 @@ defmodule PomeloEx.Cards.SensitiveInformation.Handling do
   2. Use this new token as a query parameter embedding the Pomelo website in your UI.
   3. Set the styles you want and the required parameters.
   """
+  alias PomeloEx.Cards.SensitiveInformation.Handling.ActivateCard
+  alias PomeloEx.Cards.SensitiveInformation.Handling.DisplaySensitiveInformation
 
   @doc """
   Display sensitive information
@@ -61,8 +63,6 @@ defmodule PomeloEx.Cards.SensitiveInformation.Handling do
 
   <iframe allow='clipboard-write' ... ></iframe>
   """
-  alias PomeloEx.Cards.SensitiveInformation.Handling.DisplaySensitiveInformation
-
   defdelegate display_sensitive_information(payload),
     to: DisplaySensitiveInformation,
     as: :execute
@@ -141,7 +141,5 @@ defmodule PomeloEx.Cards.SensitiveInformation.Handling do
   }
 
   """
-  alias PomeloEx.Cards.SensitiveInformation.Handling.ActivateCard
-
   defdelegate activate_card(payload), to: ActivateCard, as: :execute
 end

@@ -13,6 +13,8 @@ defmodule PomeloEx.General.Authorization do
 
   For the requests to be valid, communicate with our APIs only via HTTPS and include the authorization header indicating that it is a Bearer type.
   """
+  alias PomeloEx.General.Authorization.RequestToken
+  alias PomeloEx.General.Authorization.RevokeToken
 
   @doc """
   Request token
@@ -20,13 +22,11 @@ defmodule PomeloEx.General.Authorization do
 
   Each token is a JWT that contains an expiration time. We will return the same token to you each time you request one, until it expires. When it expires, we will provide a new one.
   """
-  alias PomeloEx.General.Authorization.RequestToken
   defdelegate request_token(payload), to: RequestToken, as: :execute
 
   @doc """
   Revoke token
   The '/oauth/token/revoke' endpoint is used to revoke an access token from our cache. By revoking the token you can request a new one with the '/oauth/token' endpoint
   """
-  alias PomeloEx.General.Authorization.RevokeToken
   defdelegate revoke_token(payload), to: RevokeToken, as: :execute
 end

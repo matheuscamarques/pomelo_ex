@@ -4,6 +4,9 @@ defmodule PomeloEx.Cards.Processing.Transactions do
 
   See [documentation](https://developers.pomelo.la/en/api-reference/cards/processing/transactions) to know the processor flow
   """
+  alias PomeloEx.Cards.Processing.Transactions.Adjustments
+  alias PomeloEx.Cards.Processing.Transactions.AuthorizeTransaction
+  alias PomeloEx.Cards.Processing.Transactions.Notifications
 
   @doc """
   Authorize transaction
@@ -14,7 +17,6 @@ defmodule PomeloEx.Cards.Processing.Transactions do
   Considerations
   We expect a quick response to ensure a good experience. If the response is delayed, reject the transaction.
   """
-  alias PomeloEx.Cards.Processing.Transactions.AuthorizeTransaction
   defdelegate authorize_transaction(payload), to: AuthorizeTransaction, as: :execute
 
   @doc """
@@ -26,7 +28,6 @@ defmodule PomeloEx.Cards.Processing.Transactions do
   Considerations
   This endpoint is used during reconciliation and online flows, mainly to make adjustments during the settlement process and also in the event of returns.
   """
-  alias PomeloEx.Cards.Processing.Transactions.Adjustments
   defdelegate adjustments(payload), to: Adjustments, as: :execute
 
   @doc """
@@ -37,5 +38,4 @@ defmodule PomeloEx.Cards.Processing.Transactions do
   We are waiting for a 2XX response to ensure the notification was received. Otherwise, we will send it again.
   """
   defdelegate notifications(payload), to: Notifications, as: :execute
-  alias PomeloEx.Cards.Processing.Transactions.Notifications
 end

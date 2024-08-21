@@ -5,6 +5,11 @@ defmodule PomeloEx.General.Company do
   You can use it to create, update or even search for companies under certain parameters.
   """
 
+  alias PomeloEx.General.Company.CreateCompany
+  alias PomeloEx.General.Company.GetCompany
+  alias PomeloEx.General.Company.ModifyCompany
+  alias PomeloEx.General.Company.SearchCompanies
+
   @doc """
   Create company
   The /companies/v1/ endpoint enables you to create a new company in our database.
@@ -25,8 +30,6 @@ defmodule PomeloEx.General.Company do
 
   Argentina: The type of fiscal document accepted is the CUIT. Campos requeridos: legal_address, email, tradeName, legalName, phone, type, tax_condition
   """
-
-  alias PomeloEx.General.Company.CreateCompany
   defdelegate create_company(payload), to: CreateCompany, as: :execute
 
   @doc """
@@ -52,14 +55,12 @@ defmodule PomeloEx.General.Company do
   tax_identification_value
   status
   """
-  alias PomeloEx.General.Company.SearchCompanies
   defdelegate search_companies(payload), to: SearchCompanies, as: :execute
 
   @doc """
   Get Company
   The /companies/v1/{id} endpoint enables you to query a company's information through its id.
   """
-  alias PomeloEx.General.Company.GetCompany
   defdelegate get_company(payload), to: GetCompany, as: :execute
 
   @doc """
@@ -71,6 +72,5 @@ defmodule PomeloEx.General.Company do
 
   To reactivate a company that you have blocked, you will need to submit the 'status' with an 'ACTIVE' value.
   """
-  alias PomeloEx.General.Company.ModifyCompany
   defdelegate modify_company(payload), to: ModifyCompany, as: :execute
 end
