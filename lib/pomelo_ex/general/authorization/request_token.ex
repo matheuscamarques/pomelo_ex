@@ -10,7 +10,7 @@ defmodule PomeloEx.General.Authorization.RequestToken do
     field(:grant_type, :string, enforce: true, null: false)
   end
 
-  def execute() do
+  def execute do
     %__MODULE__{
       client_id: Application.get_env(:pomelo_ex, :client_id),
       client_secret: Application.get_env(:pomelo_ex, :client_secret),
