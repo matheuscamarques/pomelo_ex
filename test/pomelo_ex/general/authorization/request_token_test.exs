@@ -1,9 +1,9 @@
 defmodule PomeloEx.General.Authorization.RequestTokenTest do
+  @moduledoc false
   use ExUnit.Case
-  doctest PomeloEx.General.Authorization.RequestToken
   alias PomeloEx.General.Authorization.RequestToken
 
-  test "Sucess 200 - Authenticate Token" do
-    assert PomeloEx.General.Authorization.RequestToken.execute() == true
+  test "Success 200 - Authenticate Token" do
+    assert {:ok, %HTTPoison.Response{status_code: 200}} = RequestToken.execute()
   end
 end
