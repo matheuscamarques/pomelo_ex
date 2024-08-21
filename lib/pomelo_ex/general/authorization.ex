@@ -22,6 +22,7 @@ defmodule PomeloEx.General.Authorization do
 
   Each token is a JWT that contains an expiration time. We will return the same token to you each time you request one, until it expires. When it expires, we will provide a new one.
   """
+  defdelegate request_token(), to: RequestToken, as: :execute
   defdelegate request_token(payload), to: RequestToken, as: :execute
 
   @doc """
