@@ -2,6 +2,7 @@ defmodule PomeloEx.General.Authorization.RequestToken do
   @moduledoc false
   use TypedEctoSchema
 
+  @primary_key false
   typed_embedded_schema do
     field(:client_id, :string, enforce: true, null: false)
     field(:client_secret, :string, enforce: true, null: false)
