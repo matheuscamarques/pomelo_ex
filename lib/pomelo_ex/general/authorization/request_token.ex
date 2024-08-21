@@ -19,16 +19,23 @@ defmodule PomeloEx.General.Authorization.RequestToken do
     |> execute()
   end
 
-  def execute(%__MODULE__{client_id: client_id, client_secret: client_secret, audience: audience, grant_type: grant_type}) do
+  def execute(%__MODULE__{
+        client_id: client_id,
+        client_secret: client_secret,
+        audience: audience,
+        grant_type: grant_type
+      }) do
     url = Application.get_env(:pomelo_ex, :url)
 
     headers = [{"Content-Type", "application/json"}]
-    body = Jason.encode!(%{
-      client_id: client_id,
-      client_secret: client_secret,
-      audience: audience,
-      grant_type: grant_type
-    })
+
+    body =
+      Jason.encode!(%{
+        client_id: client_id,
+        client_secret: client_secret,
+        audience: audience,
+        grant_type: grant_type
+      })
 
     HTTPoison.post("#{url}/oauth/token", body, headers)
   end
