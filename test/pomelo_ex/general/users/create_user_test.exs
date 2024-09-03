@@ -4,10 +4,11 @@ defmodule PomeloEx.General.Users.CreateUserTest do
   import Mox
 
   alias PomeloEx.General.Users.CreateUser
+  alias PomeloEx.General.Users.CreateUser.LegalAddress
   alias PomeloEx.General.UsersFixtures
 
   test "Success 201 - Create User" do
-    payload = %PomeloEx.General.Users.CreateUser{
+    payload = %CreateUser{
       name: "Diego",
       surname: "Pomelo",
       identification_type: "RG",
@@ -18,7 +19,7 @@ defmodule PomeloEx.General.Users.CreateUserTest do
       phone: "1123456789",
       nationality: "BRA",
       tax_condition: "VAT_REGISTERED",
-      legal_address: %PomeloEx.General.Users.CreateUser.LegalAddress{
+      legal_address: %LegalAddress{
         street_name: "Av. Corrientes",
         street_number: 300,
         floor: 1,
@@ -33,13 +34,13 @@ defmodule PomeloEx.General.Users.CreateUserTest do
       operation_country: "BRA"
     }
 
-    expected_body = UsersFixtures.create_user_response()
+    expect(HTTPMock, :post, fn url, _body, _headers ->
+      assert url == Application.get_env(:pomelo_ex, :url) <> "/users/v1/"
 
-    expect(HTTPMock, :post, fn _url, _body, _headers ->
       {:ok,
        %HTTPoison.Response{
          status_code: 201,
-         body: expected_body
+         body: UsersFixtures.create_user_response()
        }}
     end)
 
