@@ -1,5 +1,34 @@
 defmodule PomeloEx.General.UsersFixtures do
-  @moduledoc false
+  alias PomeloEx.General.Users.CreateUser
+  alias PomeloEx.General.Users.CreateUser.LegalAddress
+
+  def create_user_request do
+    %CreateUser{
+      name: "Diego",
+      surname: "Pomelo",
+      identification_type: "RG",
+      identification_value: 42_345_678,
+      birthdate: "1998-08-20",
+      gender: "MALE",
+      email: "diego.pomelo@pomelo.la",
+      phone: "1123456789",
+      nationality: "BRA",
+      tax_condition: "VAT_REGISTERED",
+      legal_address: %LegalAddress{
+        street_name: "Av. Corrientes",
+        street_number: 300,
+        floor: 1,
+        apartment: "A",
+        zip_code: "04545041",
+        neighborhood: "Villa Crespo",
+        city: "CABA",
+        region: "Buenos Aires",
+        additional_info: "Torre 2",
+        country: "BRA"
+      },
+      operation_country: "BRA"
+    }
+  end
 
   def create_user_response do
     ~s|
