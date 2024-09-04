@@ -25,3 +25,6 @@ pomelo_ex-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Startup script
+.iex.exs
