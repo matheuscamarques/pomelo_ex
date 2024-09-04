@@ -1,30 +1,10 @@
 defmodule PomeloEx.General.Users.SearchUser do
   @moduledoc false
-  use TypedEctoSchema
 
   alias PomeloEx.General.Authorization
+  alias PomeloEx.Types.General.Users.SearchUserType
 
-  @primary_key false
-  typed_embedded_schema do
-    field(:filter_identification_value, :string)
-    field(:filter_identification_type, :string)
-    field(:filter_tax_identification_type, :string)
-    field(:filter_tax_identification_value, :string)
-    field(:filter_gender, :string)
-    field(:filter_birthdate, :string)
-    field(:filter_name, :string)
-    field(:filter_surname, :string)
-    field(:filter_email, :string)
-    field(:filter_status, :string)
-    field(:filter_country_code, :string)
-    field(:filter_company_id, :binary_id)
-    field(:filter_tax_condition, :string)
-    field(:page_size, :integer)
-    field(:page_number, :integer)
-    field(:sort, {:array, :string})
-  end
-
-  def execute(payload) do
+  def execute(%SearchUserType{} = payload) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers()
@@ -51,7 +31,7 @@ defmodule PomeloEx.General.Users.SearchUser do
     ]
   end
 
-  defp to_query_params(%__MODULE__{} = params) do
+  defp to_query_params(%SearchUserType{} = params) do
     params
     |> Map.from_struct()
     |> Enum.map(&format_pair/1)

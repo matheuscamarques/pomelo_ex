@@ -16,7 +16,9 @@ defmodule PomeloEx.General.Users.SearchUserTest do
        }}
     end)
 
-    {:ok, response} = SearchUser.execute(%SearchUser{})
+    payload = UsersFixtures.search_user_request()
+
+    {:ok, response} = SearchUser.execute(payload)
 
     body = Jason.decode!(response.body)
 

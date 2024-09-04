@@ -1,6 +1,7 @@
 defmodule PomeloEx.General.UsersFixtures do
   alias PomeloEx.Types.General.Users.CreateUserLegalAddressType
   alias PomeloEx.Types.General.Users.CreateUserType
+  alias PomeloEx.Types.General.Users.SearchUserType
   alias PomeloEx.General.Users.GetUser
 
   def create_user_request do
@@ -29,6 +30,10 @@ defmodule PomeloEx.General.UsersFixtures do
       },
       operation_country: "BRA"
     }
+  end
+
+  def search_user_request(params \\ %{}) do
+    Map.merge(%SearchUserType{}, params)
   end
 
   def get_user_request do
