@@ -2,6 +2,7 @@ defmodule PomeloEx.General.UsersFixtures do
   alias PomeloEx.Types.General.Users.CreateUserLegalAddressType
   alias PomeloEx.Types.General.Users.CreateUserType
   alias PomeloEx.Types.General.Users.GetUserType
+  alias PomeloEx.Types.General.Users.ModifyUserType
   alias PomeloEx.Types.General.Users.SearchUserType
 
   def create_user_request do
@@ -38,6 +39,14 @@ defmodule PomeloEx.General.UsersFixtures do
 
   def get_user_request do
     %GetUserType{id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu"}
+  end
+
+  def modify_user_request do
+    %ModifyUserType{
+      id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu",
+      status: "BLOCKED",
+      status_reason: "CLIENT_INTERNAL_REASON"
+    }
   end
 
   def create_user_response do
@@ -133,6 +142,41 @@ defmodule PomeloEx.General.UsersFixtures do
             "email": "diego.pomelo@pomelo.la",
             "phone": "1123456789",
             "status": "ACTIVE",
+            "operation_country": "BRA",
+            "legal_address": {
+              "floor": "1",
+              "street_name": "Av. Corrientes",
+              "street_number": "300",
+              "apartment": "A",
+              "city": "Ilhéus-Itabuna",
+              "region": "BA",
+              "zip_code": "4545041",
+              "neighborhood": "Villa Crespo",
+              "country": "BRA",
+              "additional_info": "Torre 2"
+            },
+            "client_id": "cli-2ijPOgbwKFkmUjEnE4vM9IMea78",
+            "nationality": "BRA",
+            "tax_condition": "VAT_REGISTERED"
+          }
+        }
+    |
+  end
+
+  def modify_user_response do
+    ~s|
+        {
+          "data": {
+            "id": "usr-2lWyhVOQarR8I5te2XNXdMleSEu",
+            "name": "Diego",
+            "surname": "Pomelo",
+            "identification_type": "RG",
+            "identification_value": "42345678",
+            "birthdate": "1998-08-20",
+            "gender": "MALE",
+            "email": "diego.pomelo@pomelo.la",
+            "phone": "1123456789",
+            "status": "BLOCKED",
             "operation_country": "BRA",
             "legal_address": {
               "floor": "1",
