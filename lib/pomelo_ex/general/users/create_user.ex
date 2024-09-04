@@ -3,47 +3,11 @@ defmodule PomeloEx.General.Users.CreateUser do
   use TypedEctoSchema
 
   alias PomeloEx.General.Authorization
+  alias PomeloEx.Types.General.Users.CreateUserType
 
   @idempotency_key_length 14
 
-  defmodule LegalAddress do
-    @moduledoc false
-    use TypedEctoSchema
-
-    @derive Jason.Encoder
-    typed_embedded_schema do
-      field(:street_name, :string, enforce: true, null: false)
-      field(:street_number, :string, enforce: true, null: false)
-      field(:floor, :string)
-      field(:apartment, :string)
-      field(:zip_code, :string, enforce: true, null: false)
-      field(:neighborhood, :string)
-      field(:city, :string, enforce: true, null: false)
-      field(:region, :string, enforce: true, null: false)
-      field(:additional_info, :string)
-      field(:country, :string, enforce: true, null: false)
-    end
-  end
-
-  @derive Jason.Encoder
-  typed_embedded_schema do
-    field(:name, :string)
-    field(:surname, :string)
-    field(:identification_type, :string)
-    field(:identification_value, :string)
-    field(:birthdate, :string)
-    field(:gender, :string)
-    field(:email, :string, enforce: true, null: false)
-    field(:phone, :string)
-    field(:tax_identification_type, :string)
-    field(:tax_identification_value, :string)
-    field(:nationality, :string)
-    field(:tax_condition, :string)
-    field(:operation_country, :string, enforce: true, null: false)
-    embeds_one(:legal_address, LegalAddress)
-  end
-
-  def execute(%__MODULE__{} = payload) do
+  def execute(%CreateUserType{} = payload) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers()

@@ -1,10 +1,10 @@
 defmodule PomeloEx.General.UsersFixtures do
-  alias PomeloEx.General.Users.CreateUser
-  alias PomeloEx.General.Users.CreateUser.LegalAddress
+  alias PomeloEx.Types.General.Users.CreateUserLegalAddressType
+  alias PomeloEx.Types.General.Users.CreateUserType
   alias PomeloEx.General.Users.GetUser
 
   def create_user_request do
-    %CreateUser{
+    %CreateUserType{
       name: "Diego",
       surname: "Pomelo",
       identification_type: "RG",
@@ -15,7 +15,7 @@ defmodule PomeloEx.General.UsersFixtures do
       phone: "1123456789",
       nationality: "BRA",
       tax_condition: "VAT_REGISTERED",
-      legal_address: %LegalAddress{
+      legal_address: %CreateUserLegalAddressType{
         street_name: "Av. Corrientes",
         street_number: 300,
         floor: 1,
