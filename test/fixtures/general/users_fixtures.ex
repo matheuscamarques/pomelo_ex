@@ -1,8 +1,8 @@
 defmodule PomeloEx.General.UsersFixtures do
   alias PomeloEx.Types.General.Users.CreateUserLegalAddressType
   alias PomeloEx.Types.General.Users.CreateUserType
+  alias PomeloEx.Types.General.Users.GetUserType
   alias PomeloEx.Types.General.Users.SearchUserType
-  alias PomeloEx.General.Users.GetUser
 
   def create_user_request do
     %CreateUserType{
@@ -37,7 +37,7 @@ defmodule PomeloEx.General.UsersFixtures do
   end
 
   def get_user_request do
-    %GetUser{id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu"}
+    %GetUserType{id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu"}
   end
 
   def create_user_response do

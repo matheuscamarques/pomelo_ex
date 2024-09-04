@@ -1,13 +1,10 @@
 defmodule PomeloEx.General.Users.GetUser do
   @moduledoc false
-  use TypedEctoSchema
 
   alias PomeloEx.General.Authorization
+  alias PomeloEx.Types.General.Users.GetUserType
 
-  typed_embedded_schema do
-  end
-
-  def execute(%__MODULE__{id: id}) do
+  def execute(%GetUserType{id: id}) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers()
