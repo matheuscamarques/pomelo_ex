@@ -7,6 +7,7 @@ defmodule PomeloEx.General.UsersFixtures do
 
   def create_user_request do
     %CreateUserType{
+      token: "fRwX12Dg3345AD",
       name: "Diego",
       surname: "Pomelo",
       identification_type: "RG",
@@ -34,15 +35,16 @@ defmodule PomeloEx.General.UsersFixtures do
   end
 
   def search_user_request(params \\ %{}) do
-    Map.merge(%SearchUserType{}, params)
+    Map.merge(%SearchUserType{token: "fRwX12Dg3345AD"}, params)
   end
 
   def get_user_request do
-    %GetUserType{id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu"}
+    %GetUserType{token: "fRwX12Dg3345AD", id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu"}
   end
 
   def modify_user_request do
     %ModifyUserType{
+      token: "fRwX12Dg3345AD",
       id: "usr-2lWyhVOQarR8I5te2XNXdMleSEu",
       status: "BLOCKED",
       status_reason: "CLIENT_INTERNAL_REASON"

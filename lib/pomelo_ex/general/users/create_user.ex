@@ -2,26 +2,24 @@ defmodule PomeloEx.General.Users.CreateUser do
   @moduledoc false
   use TypedEctoSchema
 
-  alias PomeloEx.General.Authorization
   alias PomeloEx.Types.General.Users.CreateUserType
 
-  def execute(%CreateUserType{} = payload) do
+  def execute(%CreateUserType{token: token} = payload) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
-    headers = build_headers()
-    body = Jason.encode!(payload)
+
+    headers = build_headers(token)
+
+    body =
+      payload
+      |> Map.from_struct()
+      |> Map.delete(:token)
+      |> Jason.encode!()
 
     http_client.post("#{url}/users/v1/", body, headers)
   end
 
-  defp build_headers do
-    {:ok, %HTTPoison.Response{status_code: 200, body: body}} = Authorization.request_token()
-
-    token =
-      body
-      |> Jason.decode!()
-      |> Map.fetch!("access_token")
-
+  defp build_headers(token) do
     idempotency_key_length = Application.get_env(:pomelo_ex, :idempotency_key_length)
 
     idempotency_key =

@@ -3,5 +3,6 @@ defmodule PomeloEx.Types.General.Users.GetUserType do
   use TypedEctoSchema
 
   typed_embedded_schema do
+    field(:token, :string, enforce: true, null: false)
   end
 end

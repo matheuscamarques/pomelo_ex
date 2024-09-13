@@ -6,6 +6,7 @@ defmodule PomeloEx.Types.General.Users.CreateUserType do
 
   @derive Jason.Encoder
   typed_embedded_schema do
+    field(:token, :string, enforce: true, null: false)
     field(:name, :string)
     field(:surname, :string)
     field(:identification_type, :string)

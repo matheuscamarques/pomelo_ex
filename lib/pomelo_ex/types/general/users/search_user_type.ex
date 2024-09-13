@@ -4,6 +4,7 @@ defmodule PomeloEx.Types.General.Users.SearchUserType do
 
   @primary_key false
   typed_embedded_schema do
+    field(:token, :string, enforce: true, null: false)
     field(:filter_identification_value, :string)
     field(:filter_identification_type, :string)
     field(:filter_tax_identification_type, :string)

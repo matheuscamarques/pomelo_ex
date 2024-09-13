@@ -1,30 +1,23 @@
 defmodule PomeloEx.General.Users.SearchUser do
   @moduledoc false
 
-  alias PomeloEx.General.Authorization
   alias PomeloEx.Types.General.Users.SearchUserType
 
-  def execute(%SearchUserType{} = payload) do
+  def execute(%SearchUserType{token: token} = payload) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
-    headers = build_headers()
+    headers = build_headers(token)
 
     params =
       payload
+      |> Map.delete(:token)
       |> to_query_params()
       |> URI.encode_query()
 
     http_client.get("#{url}/users/v1/?#{params}", headers)
   end
 
-  defp build_headers do
-    {:ok, %HTTPoison.Response{status_code: 200, body: body}} = Authorization.request_token()
-
-    token =
-      body
-      |> Jason.decode!()
-      |> Map.fetch!("access_token")
-
+  defp build_headers(token) do
     [
       {"Content-Type", "application/json"},
       {"Authorization", "Bearer #{token}"}
