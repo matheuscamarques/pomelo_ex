@@ -5,8 +5,6 @@ defmodule PomeloEx.General.Users.CreateUser do
   alias PomeloEx.General.Authorization
   alias PomeloEx.Types.General.Users.CreateUserType
 
-  @idempotency_key_length 14
-
   def execute(%CreateUserType{} = payload) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
@@ -24,11 +22,13 @@ defmodule PomeloEx.General.Users.CreateUser do
       |> Jason.decode!()
       |> Map.fetch!("access_token")
 
+    idempotency_key_length = Application.get_env(:pomelo_ex, :idempotency_key_length)
+
     idempotency_key =
-      @idempotency_key_length
+      idempotency_key_length
       |> :crypto.strong_rand_bytes()
       |> Base.encode64(padding: false)
-      |> binary_part(0, @idempotency_key_length)
+      |> binary_part(0, idempotency_key_length)
 
     [
       {"Content-Type", "application/json"},
