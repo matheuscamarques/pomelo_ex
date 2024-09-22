@@ -1,5 +1,6 @@
 # The directory Mix will write compiled artifacts to.
 /_build/
+.elixir_ls/
 
 # If you run "mix test --cover", coverage assets end up here.
 /cover/
@@ -24,3 +25,6 @@ pomelo_ex-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Startup script
+.iex.exs

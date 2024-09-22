@@ -31,7 +31,7 @@
           "apps/*/test/",
           "apps/*/web/"
         ],
-        excluded: [~r"/_build/", ~r"/deps/", ~r"/node_modules/"]
+        excluded: [~r"/_build/", ~r"/deps/", ~r"/node_modules/", ~r"/test/fixtures/"]
       },
       #
       # Load and configure plugins here:
@@ -99,7 +99,12 @@
           {Credo.Check.Readability.LargeNumbers, []},
           {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 120]},
           {Credo.Check.Readability.ModuleAttributeNames, []},
-          {Credo.Check.Readability.ModuleDoc, []},
+          {Credo.Check.Readability.ModuleDoc,
+           [
+             ignore_names: [
+               ~r/(\w+Test)$/
+             ]
+           ]},
           {Credo.Check.Readability.ModuleNames, []},
           {Credo.Check.Readability.ParenthesesInCondition, []},
           {Credo.Check.Readability.ParenthesesOnZeroArityDefs, []},
