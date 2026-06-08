@@ -8,6 +8,10 @@ defmodule PomeloEx.Cards.Tokenization.Webhooks do
   @doc """
   Token event notifications
   """
+  defdelegate token_event_notification(payload),
+    to: TokenEventNotifications,
+    as: :execute
+
   defdelegate token_event_notifications(payload),
     to: TokenEventNotifications,
     as: :execute

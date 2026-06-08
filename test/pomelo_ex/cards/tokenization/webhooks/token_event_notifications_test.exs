@@ -1,6 +1,7 @@
 defmodule PomeloEx.Cards.Tokenization.Webhooks.TokenEventNotificationsTest do
   use ExUnit.Case
 
+  alias PomeloEx.Cards.Tokenization.Webhooks
   alias PomeloEx.Cards.Tokenization.Webhooks.TokenEventNotifications
   alias PomeloEx.Cards.TokenizationWebhooksFixtures
 
@@ -9,5 +10,9 @@ defmodule PomeloEx.Cards.Tokenization.Webhooks.TokenEventNotificationsTest do
 
     {:ok, response} = TokenEventNotifications.execute(payload)
     assert response.event_id == payload.event_id
+
+    # Test the delegates on Webhooks entrypoint
+    assert {:ok, ^payload} = Webhooks.token_event_notification(payload)
+    assert {:ok, ^payload} = Webhooks.token_event_notifications(payload)
   end
 end
