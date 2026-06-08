@@ -1,7 +1,9 @@
 defmodule PomeloEx.Cards.Processing.Transactions.AuthorizeTransaction do
   @moduledoc false
 
-  def execute(payload) do
-    raise "Not implemented #{__MODULE__} payload:" <> inspect(payload)
+  alias PomeloEx.Types.Cards.Processing.Transactions.AuthorizeTransactionType
+
+  def execute(%AuthorizeTransactionType{} = payload) do
+    {:ok, payload}
   end
 end

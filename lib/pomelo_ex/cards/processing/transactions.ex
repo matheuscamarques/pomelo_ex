@@ -6,7 +6,9 @@ defmodule PomeloEx.Cards.Processing.Transactions do
   """
   alias PomeloEx.Cards.Processing.Transactions.Adjustments
   alias PomeloEx.Cards.Processing.Transactions.AuthorizeTransaction
+  alias PomeloEx.Cards.Processing.Transactions.CardShippingOfOtpCodes
   alias PomeloEx.Cards.Processing.Transactions.Notifications
+  alias PomeloEx.Cards.Processing.Transactions.PresentmentsNotifications
 
   @doc """
   Authorize transaction
@@ -38,4 +40,16 @@ defmodule PomeloEx.Cards.Processing.Transactions do
   We are waiting for a 2XX response to ensure the notification was received. Otherwise, we will send it again.
   """
   defdelegate notifications(payload), to: Notifications, as: :execute
+
+  @doc """
+  Notifications of Presentments
+  This service allows notifications when a presentment is resolved.
+  """
+  defdelegate presentments_notifications(payload), to: PresentmentsNotifications, as: :execute
+
+  @doc """
+  3DS OTP Shipping Codes Notification
+  This service allows notification to ship 3DS OTP codes.
+  """
+  defdelegate card_shipping_of_otp_codes(payload), to: CardShippingOfOtpCodes, as: :execute
 end
