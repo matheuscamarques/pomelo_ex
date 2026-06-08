@@ -1,7 +1,9 @@
 defmodule PomeloEx.Cards.Issuing.Shipments.ShipmentNotifications do
   @moduledoc false
 
-  def execute(payload) do
-    raise "Not implemented #{__MODULE__} payload:" <> inspect(payload)
+  alias PomeloEx.Types.Cards.Issuing.ShipmentNotificationsType
+
+  def execute(%ShipmentNotificationsType{} = payload) do
+    {:ok, payload}
   end
 end
