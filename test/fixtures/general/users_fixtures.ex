@@ -1,9 +1,12 @@
 defmodule PomeloEx.General.UsersFixtures do
   alias PomeloEx.Types.General.Users.CreateUserLegalAddressType
   alias PomeloEx.Types.General.Users.CreateUserType
+  alias PomeloEx.Types.General.Users.CustomFieldMappingType
   alias PomeloEx.Types.General.Users.GetUserType
+  alias PomeloEx.Types.General.Users.ListCustomFieldMappingsType
   alias PomeloEx.Types.General.Users.ModifyUserType
   alias PomeloEx.Types.General.Users.SearchUserType
+  alias PomeloEx.Types.General.Users.SetCustomFieldMappingsType
 
   def create_user_request do
     %CreateUserType{
@@ -196,6 +199,51 @@ defmodule PomeloEx.General.UsersFixtures do
             "nationality": "BRA",
             "tax_condition": "VAT_REGISTERED"
           }
+        }
+    |
+  end
+
+  def list_custom_field_mappings_request do
+    %ListCustomFieldMappingsType{token: "fRwX12Dg3345AD"}
+  end
+
+  def set_custom_field_mappings_request do
+    %SetCustomFieldMappingsType{
+      token: "fRwX12Dg3345AD",
+      mappings: [
+        %CustomFieldMappingType{
+          key: "branch",
+          display_name: "Sucursal",
+          type: "string"
+        }
+      ]
+    }
+  end
+
+  def list_custom_field_mappings_response do
+    ~s|
+        {
+          "data": [
+            {
+              "key": "branch",
+              "display_name": "Sucursal",
+              "type": "string"
+            }
+          ]
+        }
+    |
+  end
+
+  def set_custom_field_mappings_response do
+    ~s|
+        {
+          "data": [
+            {
+              "key": "branch",
+              "display_name": "Sucursal",
+              "type": "string"
+            }
+          ]
         }
     |
   end

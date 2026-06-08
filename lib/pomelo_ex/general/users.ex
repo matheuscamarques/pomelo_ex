@@ -5,8 +5,10 @@ defmodule PomeloEx.General.Users do
   """
   alias PomeloEx.General.Users.CreateUser
   alias PomeloEx.General.Users.GetUser
+  alias PomeloEx.General.Users.ListCustomFieldMappings
   alias PomeloEx.General.Users.ModifyUser
   alias PomeloEx.General.Users.SearchUser
+  alias PomeloEx.General.Users.SetCustomFieldMappings
 
   @doc """
   Create user
@@ -305,4 +307,17 @@ defmodule PomeloEx.General.Users do
   In case the operating country is Chile, there are no special requirements regarding the user's legal address fields.
   """
   defdelegate modify_user(payload), to: ModifyUser, as: :execute
+
+  @doc """
+  List custom field mappings
+  The GET /users/v1/custom-fields/mappings endpoint lets you list all custom field mappings configured.
+  """
+  defdelegate list_custom_field_mappings(payload), to: ListCustomFieldMappings, as: :execute
+
+  @doc """
+  Set custom field mappings
+  The POST /users/v1/custom-fields/mappings endpoint lets you establish custom field mappings.
+  This method replaces all existing mappings with the new ones provided.
+  """
+  defdelegate set_custom_field_mappings(payload), to: SetCustomFieldMappings, as: :execute
 end
