@@ -9,7 +9,9 @@ defmodule PomeloEx.Identity.KYB.GetSessionTest do
     payload = KYBFixtures.get_session_request()
 
     expect(HTTPMock, :get, fn url, _headers ->
-      assert url == Application.get_env(:pomelo_ex, :url) <> "/identity/v1/sessions/#{payload.session_id}"
+      assert url ==
+               Application.get_env(:pomelo_ex, :url) <>
+                 "/identity/v1/sessions/#{payload.session_id}"
 
       {:ok,
        %HTTPoison.Response{

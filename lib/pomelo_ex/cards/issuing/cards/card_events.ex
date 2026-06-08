@@ -1,7 +1,9 @@
 defmodule PomeloEx.Cards.Issuing.Cards.CardEvents do
   @moduledoc false
 
-  def execute(payload) do
-    raise "Not implemented #{__MODULE__} payload:" <> inspect(payload)
+  alias PomeloEx.Types.Cards.Issuing.CardEventsType
+
+  def execute(%CardEventsType{} = payload) do
+    {:ok, payload}
   end
 end

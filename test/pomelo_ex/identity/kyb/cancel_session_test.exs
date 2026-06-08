@@ -9,7 +9,9 @@ defmodule PomeloEx.Identity.KYB.CancelSessionTest do
     payload = KYBFixtures.cancel_session_request()
 
     expect(HTTPMock, :delete, fn url, _headers ->
-      assert url == Application.get_env(:pomelo_ex, :url) <> "/identity/v1/sessions/#{payload.session_id}"
+      assert url ==
+               Application.get_env(:pomelo_ex, :url) <>
+                 "/identity/v1/sessions/#{payload.session_id}"
 
       {:ok,
        %HTTPoison.Response{
