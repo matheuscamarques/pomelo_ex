@@ -2,7 +2,7 @@ defmodule PomeloEx.Cards.Tokenization.Webhooks do
   @moduledoc """
   This service notifies you of events related to tokenization.
   """
-  alias PomeloEx.Cards.Tokenization.Webhooks.OtpDeliveryNotifications
+  alias PomeloEx.Cards.Tokenization.Webhooks.OtpShippingNotifications
   alias PomeloEx.Cards.Tokenization.Webhooks.TokenEventNotifications
 
   @doc """
@@ -13,9 +13,13 @@ defmodule PomeloEx.Cards.Tokenization.Webhooks do
     as: :execute
 
   @doc """
-  OTP delivery notifications
+  OTP shipping notifications
   """
-  defdelegate otp_delivery_notifications(payload),
-    to: OtpDeliveryNotifications,
+  defdelegate otp_shipping_notification(payload),
+    to: OtpShippingNotifications,
+    as: :execute
+
+  defdelegate otp_shipping_notifications(payload),
+    to: OtpShippingNotifications,
     as: :execute
 end

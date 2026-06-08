@@ -1,5 +1,5 @@
 defmodule PomeloEx.Cards.TokenizationWebhooksFixtures do
-  alias PomeloEx.Types.Cards.Tokenization.Webhooks.OtpDeliveryNotificationsType
+  alias PomeloEx.Types.Cards.Tokenization.Webhooks.OtpShippingNotificationsType
   alias PomeloEx.Types.Cards.Tokenization.Webhooks.TokenEventNotificationsType
 
   def token_event_notifications_request do
@@ -14,8 +14,8 @@ defmodule PomeloEx.Cards.TokenizationWebhooksFixtures do
     }
   end
 
-  def otp_delivery_notifications_request do
-    %OtpDeliveryNotificationsType{
+  def otp_shipping_notification_request do
+    %OtpShippingNotificationsType{
       event_id: "evt-67890",
       type: "OTP_SENT",
       data: %{

@@ -1,4 +1,4 @@
-defmodule PomeloEx.Types.Cards.Tokenization.Webhooks.OtpDeliveryNotificationsType do
+defmodule PomeloEx.Types.Cards.Tokenization.Webhooks.OtpShippingNotificationsType do
   @moduledoc false
   use TypedEctoSchema
 
