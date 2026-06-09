@@ -1,0 +1,36 @@
+defmodule PomeloEx.Cards.Credits.CreditProduct.GetProducts do
+  @moduledoc false
+
+  alias PomeloEx.Types.Cards.Credits.CreditProduct.GetProductsType
+
+  def execute(%GetProductsType{token: token} = payload) do
+    http_client = Application.get_env(:pomelo_ex, :http_adapter)
+    url = Application.get_env(:pomelo_ex, :url)
+    headers = build_headers(token)
+
+    params =
+      payload
+      |> Map.from_struct()
+      |> Map.delete(:token)
+      |> Enum.filter(fn {_k, v} -> not is_nil(v) end)
+      |> Enum.map(&format_pair/1)
+      |> Map.new()
+      |> URI.encode_query()
+
+    http_client.get("#{url}/lending/v1/products/?#{params}", headers)
+  end
+
+  defp build_headers(token) do
+    [
+      {"Content-Type", "application/json"},
+      {"Authorization", "Bearer #{token}"}
+    ]
+  end
+
+  defp format_pair({:page_number, value}), do: {"page[number]", to_string(value)}
+  defp format_pair({:page_size, value}), do: {"page[size]", to_string(value)}
+  defp format_pair({key, value}) do
+    key = key |> Atom.to_string() |> String.replace("_", ".")
+    {key, to_string(value)}
+  end
+end

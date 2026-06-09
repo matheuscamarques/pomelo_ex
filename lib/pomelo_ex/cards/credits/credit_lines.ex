@@ -1,22 +1,25 @@
 defmodule PomeloEx.Cards.Credits.CreditLines do
   @moduledoc """
-  The Credit Lines service allows you to create and manage both credit products and credit lines
+  The Credit Lines service allows you to create and manage credit lines
 
   Want to know more about credit lines? Check out our [documentation](https://docs.pomelo.la/docs/cards/lending/credit-line).
+
+  > For credit product management, see `PomeloEx.Cards.Credits.CreditProduct`.
   """
   alias PomeloEx.Cards.Credits.CreditLines.CancelCreditLine
   alias PomeloEx.Cards.Credits.CreditLines.CreateCreditLine
-  alias PomeloEx.Cards.Credits.CreditLines.CreatePriceUpdate
-  alias PomeloEx.Cards.Credits.CreditLines.CreateProduct
-  alias PomeloEx.Cards.Credits.CreditLines.DeactivatingProduct
   alias PomeloEx.Cards.Credits.CreditLines.GetCreditLine
   alias PomeloEx.Cards.Credits.CreditLines.GetCreditLines
-  alias PomeloEx.Cards.Credits.CreditLines.GetPriceUpdateHistory
-  alias PomeloEx.Cards.Credits.CreditLines.GetProduct
-  alias PomeloEx.Cards.Credits.CreditLines.GetProducts
-  alias PomeloEx.Cards.Credits.CreditLines.ModifyPendingPriceUpdate
   alias PomeloEx.Cards.Credits.CreditLines.UpdateCreditLine
-  alias PomeloEx.Cards.Credits.CreditLines.UpdateProduct
+
+  alias PomeloEx.Cards.Credits.CreditProduct.CreatePriceUpdate
+  alias PomeloEx.Cards.Credits.CreditProduct.CreateProduct
+  alias PomeloEx.Cards.Credits.CreditProduct.DeactivatingProduct
+  alias PomeloEx.Cards.Credits.CreditProduct.GetPriceUpdateHistory
+  alias PomeloEx.Cards.Credits.CreditProduct.GetProduct
+  alias PomeloEx.Cards.Credits.CreditProduct.GetProducts
+  alias PomeloEx.Cards.Credits.CreditProduct.ModifyPendingPriceUpdate
+  alias PomeloEx.Cards.Credits.CreditProduct.UpdateProduct
 
   @doc """
   Create Product
