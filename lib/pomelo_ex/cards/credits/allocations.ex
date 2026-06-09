@@ -6,6 +6,7 @@ defmodule PomeloEx.Cards.Credits.Allocations do
   alias PomeloEx.Cards.Credits.Allocations.GenerateAllocation
   alias PomeloEx.Cards.Credits.Allocations.ObtainAllocation
   alias PomeloEx.Cards.Credits.Allocations.ObtainAllocations
+  alias PomeloEx.Cards.Credits.Allocations.UpdateTicket
 
   @doc """
   Generate allocation
@@ -30,4 +31,10 @@ defmodule PomeloEx.Cards.Credits.Allocations do
   The endpoint /lending/v1/collections/{id} allows you to inquire about a specific allocation by providing the ID assigned to it when generated.
   """
   defdelegate obtain_allocation(payload), to: ObtainAllocation, as: :execute
+
+  @doc """
+  Update ticket
+  The endpoint /lending/v1/payment-requests/{credit_line_id} allows you to update the payment amount of a pending ticket. This service is only available for Brazil.
+  """
+  defdelegate update_ticket(payload), to: UpdateTicket, as: :execute
 end
