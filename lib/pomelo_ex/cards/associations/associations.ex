@@ -1,5 +1,16 @@
 defmodule PomeloEx.Cards.Associations.Associations do
-  @moduledoc false
+  @moduledoc """
+  Card-to-user-account linking.
+
+  Manages the linking and unlinking of cards to user accounts. Multiple cards
+  can be linked to the same account (e.g., one virtual and one physical card).
+
+  ## Requirements
+
+  - Both the account and card must have "Active" status
+  - The account and card must belong to the same user
+  - A card can only be linked to one account per currency
+  """
   alias PomeloEx.Cards.Associations.Associations.LinkCard
   alias PomeloEx.Cards.Associations.Associations.SearchAssociations
   alias PomeloEx.Cards.Associations.Associations.UnlinkCard

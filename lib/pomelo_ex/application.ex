@@ -1,19 +1,16 @@
 defmodule PomeloEx.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
+  @moduledoc """
+  OTP Application module for `PomeloEx`.
 
+  Starts the application supervisor tree. Currently, the library is stateless
+  (no GenServers or ETS tables) and the supervisor starts with no children.
+  """
   use Application
 
   @impl true
   def start(_type, _args) do
-    children = [
-      # Starts a worker by calling: PomeloEx.Worker.start_link(arg)
-      # {PomeloEx.Worker, arg}
-    ]
+    children = []
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: PomeloEx.Supervisor]
     Supervisor.start_link(children, opts)
   end

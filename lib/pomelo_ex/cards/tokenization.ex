@@ -1,7 +1,25 @@
 defmodule PomeloEx.Cards.Tokenization do
   @moduledoc """
-  Tokenization
-  Use these endpoints to manage the lifecycle of your digital tokens.
+  Digital card token lifecycle management.
+
+  Manages the lifecycle of digital tokens used for contactless payments via digital wallets
+  (Apple Pay, Google Pay), VAU (Visa Acceptance Update), and Click to Pay.
+
+  ## Sub-modules
+
+  - `PomeloEx.Cards.Tokenization.Mastercard` — Mastercard digital wallet provisioning
+  - `PomeloEx.Cards.Tokenization.Visa` — Visa digital wallet provisioning
+  - `PomeloEx.Cards.Tokenization.VAU` — Visa Acceptance Update (VAU) management
+  - `PomeloEx.Cards.Tokenization.ClickToPay` — Click to Pay opt-in/out
+  - `PomeloEx.Cards.Tokenization.Standalone` — Standalone token management
+  - `PomeloEx.Cards.Tokenization.Webhooks` — Token event notifications
+
+  ## Token lifecycle
+
+  - `get_token_by_id/1` — Retrieve token details
+  - `suspend_token/1` — Temporarily disable a token
+  - `unsuspend_token/1` — Re-enable a suspended token
+  - `delete_token/1` — Permanently remove a token
   """
   alias PomeloEx.Cards.Tokenization.DeleteToken
   alias PomeloEx.Cards.Tokenization.GetTokenById

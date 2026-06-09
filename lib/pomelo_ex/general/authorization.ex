@@ -1,33 +1,52 @@
 defmodule PomeloEx.General.Authorization do
   @moduledoc """
-  Authorization
-  We implemented the OAuth 2.0 standard so you can communicate with our APIs with a single Bearer token.
+  OAuth 2.0 authentication for the Pomelo API.
 
-  Using the token#
-  Once you receive the access token, you must include it as an authorization header every time you communicate with our APIs.
+  All requests to Pomelo APIs require a Bearer access token. This module provides
+  functions to obtain and revoke tokens using the OAuth 2.0 client credentials flow.
 
-  Example in Curl:
+  ## Token usage
 
-  curl https://api.pomelo.la -H 'Authorization: Bearer eyJhbGciOiJSUzI1Ni'
-  Each API validates the access token and verifies that the scope matches the required permissions.
+  Once obtained, the access token must be included in every API call as an
+  `Authorization: Bearer <token>` header. The library handles this automatically
+  when you pass the `:token` field in request structs.
 
-  For the requests to be valid, communicate with our APIs only via HTTPS and include the authorization header indicating that it is a Bearer type.
+  ## Token lifecycle
+
+  Each token is a JWT with a limited expiration time. The same token is returned
+  on repeated requests until it expires. When expired, a new token is issued.
   """
   alias PomeloEx.General.Authorization.RequestToken
   alias PomeloEx.General.Authorization.RevokeToken
 
   @doc """
-  Request token
-  The endpoint /oauth/token is used to obtain an access token. When performing a successful authentication, be sure to save it as you will need it to communicate with our APIs.
+  Requests a new access token from the Pomelo OAuth 2.0 endpoint.
 
-  Each token is a JWT that contains an expiration time. We will return the same token to you each time you request one, until it expires. When it expires, we will provide a new one.
+  Uses the configured `client_id`, `client_secret`, `audience`, and `grant_type`
+  from application config. Call this function without arguments to use default
+  credentials.
+
+  ## Examples
+
+      # With default credentials from config
+      {:ok, %HTTPoison.Response{body: %{"access_token" => token}}} =
+        PomeloEx.General.Authorization.request_token()
   """
-  defdelegate request_token(), to: RequestToken, as: :execute
-  defdelegate request_token(payload), to: RequestToken, as: :execute
+  def request_token() do
+    RequestToken.execute()
+  end
+
+  def request_token(payload) do
+    RequestToken.execute(payload)
+  end
 
   @doc """
-  Revoke token
-  The '/oauth/token/revoke' endpoint is used to revoke an access token from our cache. By revoking the token you can request a new one with the '/oauth/token' endpoint
+  Revokes an active access token.
+
+  After revocation, the token can no longer be used for API calls.
+  A new token can be obtained via `request_token/0` or `request_token/1`.
   """
-  defdelegate revoke_token(payload), to: RevokeToken, as: :execute
+  def revoke_token(payload) do
+    RevokeToken.execute(payload)
+  end
 end

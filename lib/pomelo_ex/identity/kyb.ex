@@ -1,6 +1,17 @@
 defmodule PomeloEx.Identity.KYB do
   @moduledoc """
-  The Identity service lets you manage the onboarding process of companies, partners and employees in a flexible and simple manner, confirming their identity and preventing fraud.
+  Know Your Business (KYB) identity verification for legal entities.
+
+  Manages identity validation sessions for companies and their representatives.
+  Supports document upload, additional session creation for employees, and report generation.
+
+  ## Flow
+
+  1. `create_session/1` — Start a new KYB validation session for a legal entity
+  2. `create_session_additional/1` — Add natural persons (employees) to the session
+  3. `upload_file/1` — Upload company and identity documents
+  4. `get_session/1` — Check session status
+  5. `obtaining_session_report/1` — Retrieve validated company data
   """
   alias PomeloEx.Identity.KYB.CancelSession
   alias PomeloEx.Identity.KYB.CreateSession

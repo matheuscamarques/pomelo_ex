@@ -1,6 +1,9 @@
 defmodule PomeloEx.FraudPrevention.Restriction.Merchant do
   @moduledoc """
-  It is a tool that will allow you to block merchants for a certain period of time by entering their exact name.
+  Merchant blocking tool.
+
+  Allows blocking of merchants by exact name for a configurable period of time
+  (default: one month). Supports checking block status and removing blocks.
   """
   alias PomeloEx.FraudPrevention.Restriction.Merchant.BlockMerchant
   alias PomeloEx.FraudPrevention.Restriction.Merchant.GetBlockedMerchants

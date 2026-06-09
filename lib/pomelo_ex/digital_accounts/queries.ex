@@ -1,5 +1,10 @@
 defmodule PomeloEx.DigitalAccounts.Queries do
-  @moduledoc false
+  @moduledoc """
+  Digital account and activity queries.
+
+  Provides endpoints for listing and retrieving digital accounts with their balances,
+  and querying account activities with filtering and pagination.
+  """
   alias PomeloEx.DigitalAccounts.Queries.GetAccount
   alias PomeloEx.DigitalAccounts.Queries.GetActivity
   alias PomeloEx.DigitalAccounts.Queries.ListAccounts

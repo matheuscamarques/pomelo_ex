@@ -1,6 +1,10 @@
 defmodule PomeloEx.Cards.Associations.AssociateCredit do
   @moduledoc """
-  This service allows you to associate a line of credit with a specific credit card.
+  Card-to-credit-line association management.
+
+  Manages the association between physical/virtual cards and credit lines.
+  A card must be activated before it can be associated with a credit line.
+  Virtual cards are active from the moment of creation.
   """
   alias PomeloEx.Cards.Associations.AssociateCredit.AssociateCardWithLineOfCredit
   alias PomeloEx.Cards.Associations.AssociateCredit.GetAssociations

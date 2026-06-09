@@ -1,8 +1,15 @@
 defmodule PomeloEx.Cards.Processing.Transactions do
   @moduledoc """
-  You must implement and expose the “Authorization” and “ Adjustments” endpoints on your backend so that we can communicate.
+  Transaction authorization, adjustments, and notifications.
 
-  See [documentation](https://developers.pomelo.la/en/api-reference/cards/processing/transactions) to know the processor flow
+  These endpoints must be implemented and exposed on your backend so the Pomelo platform
+  can communicate authorization requests, adjustments, and settlement notifications.
+
+  ## Flow
+
+  1. `authorize_transaction/1` — Authorize or reject a transaction
+  2. `adjustments/1` — Handle credit/debit adjustments during settlement
+  3. Receive webhook notifications for presentments and OTP codes
   """
   alias PomeloEx.Cards.Processing.Transactions.Adjustments
   alias PomeloEx.Cards.Processing.Transactions.AuthorizeTransaction

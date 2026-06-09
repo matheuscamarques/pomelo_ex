@@ -1,5 +1,10 @@
 defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P do
-  @moduledoc false
+  @moduledoc """
+  Digital money movements and P2P transactions.
+
+  Provides endpoints for authorizing incoming/outgoing digital money movements,
+  peer-to-peer (P2P) transfers between Pomelo accounts, and balance adjustments.
+  """
   alias PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMovements
   alias PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeP2PTransaction
   alias PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalance

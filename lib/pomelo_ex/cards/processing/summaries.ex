@@ -1,6 +1,10 @@
 defmodule PomeloEx.Cards.Processing.Summaries do
   @moduledoc """
-  The Statements API is only available for credit cards issued in Argentina and for those who have not implemented the Credits solution, which means they have not contracted the lending engine
+  Tax calculation and retrieval for card statements.
+
+  Available for credit cards issued in Argentina that do not use the Pomelo Credits
+  lending engine. Provides tax calculation initiation and retrieval of applied taxes
+  per billing period.
   """
   alias PomeloEx.Cards.Processing.Summaries.CalculateTaxes
   alias PomeloEx.Cards.Processing.Summaries.RetrieveTaxes

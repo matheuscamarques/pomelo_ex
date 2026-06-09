@@ -1,11 +1,15 @@
 defmodule PomeloEx.Cards.Issuing.Shipments do
   @moduledoc """
-  The Shipping API comprises all the endpoints for creating shipments and retrieving data for your created shipments. You will also find endpoints to receive notifications about updates on the status of your shipments via a webhook.
+  Card shipment management and tracking.
 
-  External shipments
-  When defining your integration, you will have the option to NOT use our card distribution service.
+  Handles the physical distribution of cards to cardholders, including shipment creation,
+  address updates, delivery tracking, and real-time webhook notifications.
 
-  In that case, the affinity groups will reflect the settings you have chosen. Also, when creating a card or a batch of cards, we will return an identifier in the shipment_id field, which we recommend you store in your integration, since you will need it for pick-up. The cards will be available for pick-up at the embossing facility specified in integration.
+  ## External shipments
+
+  If you choose not to use Pomelo's card distribution service, affinity groups will reflect
+  your settings. The `shipment_id` returned when creating a card or batch is used for pickup
+  at the embossing facility.
   """
   alias PomeloEx.Cards.Issuing.Shipments.ChangeShipmentData
   alias PomeloEx.Cards.Issuing.Shipments.CreateShipment

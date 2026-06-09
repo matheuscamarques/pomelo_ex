@@ -1,5 +1,10 @@
 defmodule PomeloEx.DigitalAccounts.Accounts do
-  @moduledoc false
+  @moduledoc """
+  Digital account lifecycle management.
+
+  Provides endpoints for creating, deleting, and updating the status of digital accounts.
+  Accounts support states: ACTIVE, FROZEN, DISABLED, and DELETED.
+  """
   alias PomeloEx.DigitalAccounts.Accounts.CreateAccount
   alias PomeloEx.DigitalAccounts.Accounts.DeleteAccount
   alias PomeloEx.DigitalAccounts.Accounts.UpdateAccountStatus

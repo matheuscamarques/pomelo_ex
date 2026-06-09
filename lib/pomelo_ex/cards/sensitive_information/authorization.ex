@@ -1,6 +1,9 @@
 defmodule PomeloEx.Cards.SensitiveInformation.Authorization do
   @moduledoc """
-  With this API you can authenticate a user to display sensitive card information.
+  User authentication for sensitive card data access.
+
+  Creates short-lived (15-minute) user tokens that authorize the display of sensitive
+  card information (PAN, CVV, PIN) via the Pomelo secure data web page.
   """
   alias PomeloEx.Cards.SensitiveInformation.Authorization.CreateUserToken
 

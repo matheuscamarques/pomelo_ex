@@ -1,6 +1,21 @@
 defmodule PomeloEx.Identity.KYC do
   @moduledoc """
-  The Identity service lets you manage your users’ onboarding process in a flexible and simple manner, confirming their identity and preventing fraud.
+  Know Your Customer (KYC) identity verification for individuals.
+
+  Manages identity validation sessions for individual users (natural persons).
+  Supports document upload, session lifecycle management, and report generation.
+
+  ## Flow
+
+  1. `create_session/1` — Start a new KYC validation session
+  2. `upload_file/1` — Upload identity documents (selfie, ID card, etc.)
+  3. Receive webhook notifications via `PomeloEx.Identity.Webhooks`
+  4. `get_session/1` — Check session status
+  5. `obtaining_session_report/1` — Retrieve validated user data
+
+  ## Supported countries
+
+  Argentina, Brazil, Mexico, Colombia, Peru, Chile. Document types vary by country.
   """
   alias PomeloEx.Identity.KYC.CancelSession
   alias PomeloEx.Identity.KYC.ClearUserTestEnvironment

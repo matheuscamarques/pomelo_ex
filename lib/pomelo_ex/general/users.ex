@@ -1,7 +1,22 @@
 defmodule PomeloEx.General.Users do
   @moduledoc """
-  Users
-  The Users API contains all the endpoints needed to manage the user bases. You can use it to create, update or even search for users within certain parameters.
+  Manages user records in the Pomelo platform.
+
+  The Users API provides CRUD operations for user entities, along with custom
+  field mapping capabilities. Users represent individual people — cardholders,
+  account holders, or beneficiaries.
+
+  ## Use cases
+
+  - Onboarding new users
+  - Managing user status (active/blocked)
+  - Searching and filtering users
+  - Configuring custom field mappings
+  - Identity document validation varies by country
+
+  ## Identity documents by country
+
+  See `create_user/1` for country-specific identity and tax document requirements.
   """
   alias PomeloEx.General.Users.CreateUser
   alias PomeloEx.General.Users.GetUser

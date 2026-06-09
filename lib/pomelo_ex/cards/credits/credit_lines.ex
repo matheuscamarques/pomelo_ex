@@ -1,10 +1,20 @@
 defmodule PomeloEx.Cards.Credits.CreditLines do
   @moduledoc """
-  The Credit Lines service allows you to create and manage credit lines
+  Credit line management (V1 API).
 
-  Want to know more about credit lines? Check out our [documentation](https://docs.pomelo.la/docs/cards/lending/credit-line).
+  Provides endpoints for creating, updating, canceling credit lines, as well as debt
+  simulation and acceleration (early payment), refinancing, expiration date changes,
+  and pricing updates.
 
-  > For credit product management, see `PomeloEx.Cards.Credits.CreditProduct`.
+  > Note: This module also includes credit product operations for convenience.
+
+  ## Credit line lifecycle
+
+  1. `create_product/1` — Define a credit product with terms and pricing
+  2. `create_credit_line/1` — Issue a credit line under a product
+  3. `get_credit_line/1` — Query credit line details
+  4. Use `debt_simulation/1` or refinancing simulation before confirmation
+  5. Confirm debt operations via confirmation endpoints
   """
   alias PomeloEx.Cards.Credits.CreditLines.CancelCreditLine
   alias PomeloEx.Cards.Credits.CreditLines.CreateCreditLine

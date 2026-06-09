@@ -1,8 +1,21 @@
 defmodule PomeloEx.General.Company do
   @moduledoc """
-  Company
-  The Companies API contains all the endpoints needed to manage the company bases.
-  You can use it to create, update or even search for companies under certain parameters.
+  Manages company records in the Pomelo platform.
+
+  The Companies API provides CRUD operations for company entities. Companies represent
+  business organizations that can own cards, users, and credit lines.
+
+  ## Use cases
+
+  - Onboarding new corporate clients
+  - Managing company status (active/blocked)
+  - Searching and filtering companies
+  - Updating company information before validation
+
+  ## Country-specific considerations
+
+  Tax documents and legal address requirements vary by country. See individual
+  function documentation for details.
   """
 
   alias PomeloEx.General.Company.CreateCompany

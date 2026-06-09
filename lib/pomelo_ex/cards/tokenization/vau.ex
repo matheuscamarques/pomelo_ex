@@ -1,6 +1,11 @@
 defmodule PomeloEx.Cards.Tokenization.VAU do
   @moduledoc """
-  VAU (Visa Account Updater)
+  Visa Account Updater (VAU) management.
+
+  VAU automatically updates stored card credentials for recurring payments and
+  tokenized cards when a card is reissued (e.g., due to expiration, loss, or damage).
+  This service allows enabling/disabling VAU for specific cards and managing
+  cardholder contact and account closure notifications.
   """
   alias PomeloEx.Cards.Tokenization.VAU.DisableVauForACard
   alias PomeloEx.Cards.Tokenization.VAU.EnableVauForACard

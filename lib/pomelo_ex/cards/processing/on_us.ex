@@ -1,8 +1,10 @@
 defmodule PomeloEx.Cards.Processing.OnUs do
   @moduledoc """
-  On-us transaction processing allows you to process transactions without card network/flag involvement.
+  On-us transaction processing (same-issuer transactions).
 
-  See [documentation](https://developers.pomelo.la/api-reference/processing/on-us) to know the flow.
+  Enables processing transactions where both the issuer and acquirer are the same entity,
+  without involvement of card networks (Mastercard, Visa, etc.). Supports authorization,
+  presentment, and reversal operations.
   """
 
   alias PomeloEx.Cards.Processing.OnUs.Authorize

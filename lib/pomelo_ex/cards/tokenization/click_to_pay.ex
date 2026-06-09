@@ -1,6 +1,10 @@
 defmodule PomeloEx.Cards.Tokenization.ClickToPay do
   @moduledoc """
-  Click to Pay (VISA)
+  Visa Click to Pay management.
+
+  Click to Pay is Visa's online checkout solution that allows cardholders to pay
+  with saved card credentials across merchants without entering card details manually.
+  Supports opt-in, opt-out, and status checking.
   """
   alias PomeloEx.Cards.Tokenization.ClickToPay.GetStatus
   alias PomeloEx.Cards.Tokenization.ClickToPay.OptIn

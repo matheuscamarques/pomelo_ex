@@ -1,7 +1,17 @@
 defmodule PomeloEx.Cards.Issuing.Cards do
   @moduledoc """
-  Cards
-  The Cards API contains all the endpoints needed to create nominate and innominate cards, activate them, run queries, retrieve information on a particular card, and more.
+  Card creation, activation, and lifecycle management.
+
+  Provides endpoints for creating nominate (assigned to a user) and innominate (unassigned)
+  cards, both physical and virtual. Includes activation, status updates, batch operations,
+  and affinity group queries.
+
+  ## Card types
+
+  - **Nominate** — Assigned to a specific user at creation time
+  - **Innominate** — Created without a user assignment, can be shipped and activated later
+  - **Physical** — Plastic card shipped to the cardholder
+  - **Virtual** — Digital card for online or wallet use
   """
   alias PomeloEx.Cards.Issuing.Cards.ActivateCard
   alias PomeloEx.Cards.Issuing.Cards.CardEvents

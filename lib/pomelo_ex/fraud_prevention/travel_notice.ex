@@ -1,6 +1,9 @@
 defmodule PomeloEx.FraudPrevention.TravelNotice do
   @moduledoc """
-  Pomelo's Travel Notification is a service that enables you to temporarily increase the transaction limits for your users when they make purchases in a different country. If they have multiple cards, the Travel Notification will apply to all of them.
+  Travel notification management (legacy API).
+
+  Temporarily increases transaction limits for users making purchases abroad.
+  Travel notices apply to all cards belonging to the user.
   """
   alias PomeloEx.FraudPrevention.TravelNotice.CreateTravelNotice
   alias PomeloEx.FraudPrevention.TravelNotice.ObtainTravelNotification

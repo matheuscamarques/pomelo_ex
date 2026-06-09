@@ -1,12 +1,10 @@
 defmodule PomeloEx.Finance.Settlements do
   @moduledoc """
-  Settlements
-  The Finance API contains all the endpoints needed to query balances, notify deposits, and obtain the latest available settlement. You can use it to manage the financial information of your operation.
+  Financial settlement management.
 
-  Features
-  - **Get Balances**: Query available balances by country, currency, and balance type.
-  - **Notify Deposit**: Report a deposit via multipart/form-data, including receipt, country, currency, balance, and amount.
-  - **Get Last Settlement**: Access the latest available settlement by country, including concepts, prefunding, totals to pay, and payment instructions.
+  Provides endpoints for querying available balances by country and currency,
+  notifying deposits (with receipt upload), retrieving the latest settlement,
+  and receiving new settlement webhook notifications.
   """
   alias PomeloEx.Finance.Settlements.GetBalances
   alias PomeloEx.Finance.Settlements.GetLastSettlement
