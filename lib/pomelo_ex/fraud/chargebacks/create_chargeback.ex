@@ -4,13 +4,11 @@ defmodule PomeloEx.Fraud.Chargebacks.CreateChargeback do
   alias PomeloEx.Types.Fraud.Chargebacks.CreateChargebackType
 
   def execute(%CreateChargebackType{token: token, body: body}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body = body |> Jason.encode!()
 
-    http_client.post("#{url}/chargebacks/v2", body, headers)
+    PomeloEx.Client.request(:post, "/chargebacks/v2", body, headers)
   end
 
   defp build_headers(token) do

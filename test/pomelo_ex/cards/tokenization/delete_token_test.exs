@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Tokenization.DeleteTokenTest do
   test "Success 200 - Delete Token" do
     payload = TokenizationFixtures.delete_token_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/tokenization/v1/tokens/#{payload.external_token_id}/deletion"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TokenizationFixtures.delete_token_response()
        }}
     end)

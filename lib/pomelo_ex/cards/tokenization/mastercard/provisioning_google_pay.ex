@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.Mastercard.ProvisioningGooglePay do
   alias PomeloEx.Types.Cards.Tokenization.Mastercard.ProvisioningGooglePayType
 
   def execute(%ProvisioningGooglePayType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Cards.Tokenization.Mastercard.ProvisioningGooglePay do
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/token-provisioning/mastercard/google-pay", body, headers)
+    PomeloEx.Client.request(:post, "/token-provisioning/mastercard/google-pay", body, headers)
   end
 
   defp build_headers(token) do

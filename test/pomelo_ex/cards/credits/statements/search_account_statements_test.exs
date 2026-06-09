@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.Statements.SearchAccountStatementsTest do
   test "Success 200 - Search Account Statements" do
     payload = StatementsFixtures.search_account_statements_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert String.contains?(url, "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/")
       assert String.contains?(url, "filter[status]=CREATED")
       assert String.contains?(url, "filter[period][from]=2023-03")
@@ -19,8 +19,8 @@ defmodule PomeloEx.Cards.Credits.Statements.SearchAccountStatementsTest do
       assert String.contains?(url, "sort=status,-period")
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: StatementsFixtures.search_account_statements_response()
        }}
     end)

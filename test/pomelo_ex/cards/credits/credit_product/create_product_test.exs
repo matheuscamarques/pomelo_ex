@@ -8,15 +8,15 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.CreateProductTest do
   test "Success 201 - Create Product" do
     payload = CreditProductFixtures.create_product_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/lending/v1/products"
 
       sent_body = Jason.decode!(body)
       assert sent_body["cutoff_day"] == 15
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: CreditProductFixtures.create_product_response()
        }}
     end)

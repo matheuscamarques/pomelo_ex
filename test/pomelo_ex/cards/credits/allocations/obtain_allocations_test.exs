@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.Allocations.ObtainAllocationsTest do
   test "Success 200 - Obtain Allocations" do
     payload = AllocationsFixtures.obtain_allocations_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/collections/?filter[credit_line_id]=lcr-h4xWg6e8CiRcpHd8A6JE8MW8wSZ"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: AllocationsFixtures.obtain_allocations_response()
        }}
     end)

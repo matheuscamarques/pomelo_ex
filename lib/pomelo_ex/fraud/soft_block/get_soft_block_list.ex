@@ -4,8 +4,6 @@ defmodule PomeloEx.Fraud.SoftBlock.GetSoftBlockList do
   alias PomeloEx.Types.Fraud.SoftBlock.GetSoftBlockListType
 
   def execute(%GetSoftBlockListType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Fraud.SoftBlock.GetSoftBlockList do
       |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
       |> Enum.join("&")
 
-    http_client.get("#{url}/fraud/search/merchant/softblock?#{params}", headers)
+    PomeloEx.Client.request(:get, "/fraud/search/merchant/softblock?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

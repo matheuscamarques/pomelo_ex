@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Processing.OnUs.AuthorizeTest do
   test "Success 200 - Authorize transaction" do
     payload = OnUsFixtures.authorize_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/on-us/v1/transactions/authorize"
 
       decoded_body = Jason.decode!(body)
@@ -16,8 +16,8 @@ defmodule PomeloEx.Cards.Processing.OnUs.AuthorizeTest do
       assert decoded_body["pos"] == payload.pos
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: OnUsFixtures.on_us_success_response()
        }}
     end)

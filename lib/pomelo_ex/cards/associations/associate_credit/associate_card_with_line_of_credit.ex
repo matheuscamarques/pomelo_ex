@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit.AssociateCardWithLineOfCre
   alias PomeloEx.Types.Cards.Associations.AssociateCredit.AssociateCardWithLineOfCreditType
 
   def execute(%AssociateCardWithLineOfCreditType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit.AssociateCardWithLineOfCre
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/lending/v1/associations", body, headers)
+    PomeloEx.Client.request(:post, "/lending/v1/associations", body, headers)
   end
 
   defp build_headers(token) do

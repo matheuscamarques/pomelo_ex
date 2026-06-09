@@ -8,7 +8,7 @@ defmodule PomeloEx.Fraud.Chargebacks.CreateChargebackTest do
   test "Success 201 - Create Chargeback" do
     payload = ChargebacksFixtures.create_chargeback_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/chargebacks/v2"
 
@@ -17,8 +17,8 @@ defmodule PomeloEx.Fraud.Chargebacks.CreateChargebackTest do
       assert sent_body["reason"] == "VIRTUAL_PAYMENT"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: ChargebacksFixtures.create_chargeback_response()
        }}
     end)

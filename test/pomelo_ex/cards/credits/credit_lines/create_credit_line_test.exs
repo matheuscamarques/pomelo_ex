@@ -8,15 +8,15 @@ defmodule PomeloEx.Cards.Credits.CreditLines.CreateCreditLineTest do
   test "Success 201 - Create Credit Line" do
     payload = CreditLinesFixtures.create_credit_line_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/lending/v1/credit-lines"
 
       sent_body = Jason.decode!(body)
       assert sent_body["user_id"] == "usr-2HMwJZo114goVi7xdSseYfujP79"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: CreditLinesFixtures.create_credit_line_response()
        }}
     end)

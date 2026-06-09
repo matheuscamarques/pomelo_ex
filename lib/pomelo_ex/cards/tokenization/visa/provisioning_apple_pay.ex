@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.Visa.ProvisioningApplePay do
   alias PomeloEx.Types.Cards.Tokenization.Visa.ProvisioningApplePayType
 
   def execute(%ProvisioningApplePayType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Cards.Tokenization.Visa.ProvisioningApplePay do
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/token-provisioning/visa/apple-pay", body, headers)
+    PomeloEx.Client.request(:post, "/token-provisioning/visa/apple-pay", body, headers)
   end
 
   defp build_headers(token) do

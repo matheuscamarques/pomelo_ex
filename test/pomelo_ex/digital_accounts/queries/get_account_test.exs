@@ -8,14 +8,14 @@ defmodule PomeloEx.DigitalAccounts.Queries.GetAccountTest do
   test "Success 200 - Get Account" do
     payload = QueriesFixtures.get_account_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/core/accounts/v1/#{payload.id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: QueriesFixtures.get_account_response()
        }}
     end)

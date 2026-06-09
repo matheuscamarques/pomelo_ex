@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments.CreateShipment do
   alias PomeloEx.Types.Cards.Issuing.CreateShipmentType
 
   def execute(%CreateShipmentType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Cards.Issuing.Shipments.CreateShipment do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/shipping/v1/", body, headers)
+    PomeloEx.Client.request(:post, "/shipping/v1/", body, headers)
   end
 
   defp build_headers(token) do

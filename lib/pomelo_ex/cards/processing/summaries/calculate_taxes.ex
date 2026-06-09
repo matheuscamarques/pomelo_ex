@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Processing.Summaries.CalculateTaxes do
   alias PomeloEx.Types.Cards.Processing.Summaries.CalculateTaxesType
 
   def execute(%CalculateTaxesType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Cards.Processing.Summaries.CalculateTaxes do
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/taxes/v1/statements", body, headers)
+    PomeloEx.Client.request(:post, "/taxes/v1/statements", body, headers)
   end
 
   defp build_headers(token) do

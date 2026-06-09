@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.Statements.GetLastStatementsTest do
   test "Success 200 - Get Last Statement" do
     payload = StatementsFixtures.get_last_statements_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/last"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: StatementsFixtures.get_last_statements_response()
        }}
     end)

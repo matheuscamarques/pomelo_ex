@@ -8,19 +8,19 @@ defmodule PomeloEx.Identity.KYB.CancelSessionTest do
   test "Success 200 - Cancel Session" do
     payload = KYBFixtures.cancel_session_request()
 
-    expect(HTTPMock, :delete, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :delete, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/identity/v1/sessions/#{payload.session_id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: "{}"
        }}
     end)
 
     {:ok, response} = CancelSession.execute(payload)
-    assert response.status_code == 200
+    assert response.status == 200
   end
 end

@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.DeactivateProductTest do
   test "Success 200 - Deactivate Product" do
     payload = CreditLinesV2Fixtures.deactivate_product_request()
 
-    expect(HTTPMock, :delete, fn url, _, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :delete, url, _, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v2/products/lpr-v2-product-id"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesV2Fixtures.deactivate_product_response()
        }}
     end)

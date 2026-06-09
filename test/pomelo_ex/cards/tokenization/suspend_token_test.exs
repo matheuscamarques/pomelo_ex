@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Tokenization.SuspendTokenTest do
   test "Success 200 - Suspend Token" do
     payload = TokenizationFixtures.suspend_token_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/tokenization/v1/tokens/#{payload.external_token_id}/suspension"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TokenizationFixtures.suspend_token_response()
        }}
     end)

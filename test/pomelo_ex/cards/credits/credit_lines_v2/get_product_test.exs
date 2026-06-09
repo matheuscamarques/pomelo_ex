@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.GetProductTest do
   test "Success 200 - Get Product" do
     payload = CreditLinesV2Fixtures.get_product_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v2/products/lpr-v2-product-id"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesV2Fixtures.get_product_response()
        }}
     end)

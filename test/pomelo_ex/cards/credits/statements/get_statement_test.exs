@@ -8,13 +8,13 @@ defmodule PomeloEx.Cards.Credits.Statements.GetStatementTest do
   test "Success 200 - Get Statement" do
     payload = StatementsFixtures.get_statement_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert String.contains?(url, "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/lst-2Lm1ZH2rmhP6F1NRRBRnpUwswwP")
       assert String.contains?(url, "extended=pdf_url")
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: StatementsFixtures.get_statement_response()
        }}
     end)

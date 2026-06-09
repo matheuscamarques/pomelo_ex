@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Processing.OnUs.PresentTransactionByExternalIdTest do
   test "Success 200 - Present transaction by external ID" do
     payload = OnUsFixtures.present_transaction_by_external_id_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/on-us/v1/presentments"
 
       decoded_body = Jason.decode!(body)
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Processing.OnUs.PresentTransactionByExternalIdTest do
       assert decoded_body["reconciliation_date"] == payload.reconciliation_date
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: OnUsFixtures.on_us_success_response()
        }}
     end)

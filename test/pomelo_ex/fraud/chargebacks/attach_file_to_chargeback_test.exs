@@ -8,7 +8,7 @@ defmodule PomeloEx.Fraud.Chargebacks.AttachFileToChargebackTest do
   test "Success 200 - Attach File to Chargeback" do
     payload = ChargebacksFixtures.attach_file_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/chargebacks/v2/cbk-1ab2c3d4/attachments"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Fraud.Chargebacks.AttachFileToChargebackTest do
       assert sent_body["fileUpload"] == "base64_encoded_file_content"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: ChargebacksFixtures.attach_file_response()
        }}
     end)

@@ -8,7 +8,7 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockListTest do
   test "Success 200 - Get Block List" do
     payload = TransactionalBlockFixtures.get_block_list_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert String.starts_with?(url,
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/search/merchant/block?"
@@ -19,8 +19,8 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockListTest do
       assert String.contains?(url, "page[number]=0")
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TransactionalBlockFixtures.get_block_list_response()
        }}
     end)

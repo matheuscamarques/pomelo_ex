@@ -3,8 +3,6 @@ defmodule PomeloEx.General.Users.ModifyUser do
   alias PomeloEx.Types.General.Users.ModifyUserType
 
   def execute(%ModifyUserType{id: id, token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -15,7 +13,7 @@ defmodule PomeloEx.General.Users.ModifyUser do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.patch("#{url}/users/v1/#{id}", body, headers)
+    PomeloEx.Client.request(:patch, "/users/v1/#{id}", body, headers)
   end
 
   defp build_headers(token) do

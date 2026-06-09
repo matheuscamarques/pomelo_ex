@@ -8,12 +8,12 @@ defmodule PomeloEx.General.Company.ModifyCompanyTest do
   test "Success 200 - Modify Company" do
     payload = CompaniesFixtures.modify_company_request()
 
-    expect(HTTPMock, :patch, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/companies/v1/#{payload.id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CompaniesFixtures.modify_company_response()
        }}
     end)

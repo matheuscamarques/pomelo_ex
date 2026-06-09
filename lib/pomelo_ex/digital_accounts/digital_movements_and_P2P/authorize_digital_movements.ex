@@ -4,8 +4,6 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMoveme
   alias PomeloEx.Types.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMovementsType
 
   def execute(%AuthorizeDigitalMovementsType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
@@ -15,7 +13,7 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMoveme
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/core/transactions/v1", body, headers)
+    PomeloEx.Client.request(:post, "/core/transactions/v1", body, headers)
   end
 
   defp build_headers(token) do

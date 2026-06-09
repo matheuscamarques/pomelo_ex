@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.Allocations.GenerateAllocationTest do
   test "Success 201 - Generate Allocation" do
     payload = AllocationsFixtures.generate_allocation_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/lending/v1/collections"
 
       sent_body = Jason.decode!(body)
@@ -16,8 +16,8 @@ defmodule PomeloEx.Cards.Credits.Allocations.GenerateAllocationTest do
       assert sent_body["type"] == "PAYMENT"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: AllocationsFixtures.generate_allocation_response()
        }}
     end)

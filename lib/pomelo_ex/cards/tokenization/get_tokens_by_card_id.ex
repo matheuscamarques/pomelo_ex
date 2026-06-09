@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.GetTokensByCardId do
   alias PomeloEx.Types.Cards.Tokenization.GetTokensByCardIdType
 
   def execute(%GetTokensByCardIdType{token: token, external_card_id: external_card_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -15,7 +13,7 @@ defmodule PomeloEx.Cards.Tokenization.GetTokensByCardId do
       |> to_query_params()
       |> URI.encode_query()
 
-    http_client.get("#{url}/tokenization/v1/cards/#{external_card_id}/tokens?#{params}", headers)
+    PomeloEx.Client.request(:get, "/tokenization/v1/cards/#{external_card_id}/tokens?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

@@ -4,8 +4,6 @@ defmodule PomeloEx.General.Users.SetCustomFieldMappings do
   alias PomeloEx.Types.General.Users.SetCustomFieldMappingsType
 
   def execute(%SetCustomFieldMappingsType{token: token, mappings: mappings}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -18,7 +16,7 @@ defmodule PomeloEx.General.Users.SetCustomFieldMappings do
       end)
       |> Jason.encode!()
 
-    http_client.post("#{url}/users/v1/custom-fields/mappings", body, headers)
+    PomeloEx.Client.request(:post, "/users/v1/custom-fields/mappings", body, headers)
   end
 
   defp build_headers(token) do

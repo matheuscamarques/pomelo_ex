@@ -8,12 +8,12 @@ defmodule PomeloEx.Cards.SensitiveInformation.Authorization.CreateUserTokenTest 
   test "Success 200 - Create User Token" do
     payload = SensitiveInformationFixtures.create_user_token_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/cards/v1/tokens"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: SensitiveInformationFixtures.create_user_token_response()
        }}
     end)

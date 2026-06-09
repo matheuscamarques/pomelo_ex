@@ -8,12 +8,12 @@ defmodule PomeloEx.General.Users.ListCustomFieldMappingsTest do
   test "Success 200 - List Custom Field Mappings" do
     payload = UsersFixtures.list_custom_field_mappings_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/users/v1/custom-fields/mappings"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: UsersFixtures.list_custom_field_mappings_response()
        }}
     end)

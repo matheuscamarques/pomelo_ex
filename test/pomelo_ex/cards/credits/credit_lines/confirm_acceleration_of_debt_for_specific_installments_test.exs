@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.CreditLines.ConfirmAccelerationOfDebtForSpecifi
   test "Success 200 - Confirm Acceleration Of Debt For Specific Installments" do
     payload = CreditLinesFixtures.confirm_acceleration_of_debt_for_specific_installments_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/credit-lines/lcr-2HMwKzetERdOEhbT86UweXamPle/debt/acceleration/installments/confirmation"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.CreditLines.ConfirmAccelerationOfDebtForSpecifi
       assert sent_body["transaction_ids"] == ["ctx-1", "ctx-2"]
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesFixtures.confirm_acceleration_of_debt_for_specific_installments_response()
        }}
     end)

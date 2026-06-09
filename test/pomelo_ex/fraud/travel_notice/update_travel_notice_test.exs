@@ -8,7 +8,7 @@ defmodule PomeloEx.Fraud.TravelNotice.UpdateTravelNoticeTest do
   test "Success 200 - Update Travel Notice" do
     payload = TravelNoticeFixtures.update_travel_notice_request()
 
-    expect(HTTPMock, :put, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :put, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/fraud/travel_notice/v1/user"
 
@@ -17,8 +17,8 @@ defmodule PomeloEx.Fraud.TravelNotice.UpdateTravelNoticeTest do
       assert sent_body["value"]["countries"] == ["ARG", "BRA"]
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TravelNoticeFixtures.update_travel_notice_response()
        }}
     end)

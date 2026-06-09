@@ -26,7 +26,6 @@ defmodule PomeloEx.General.Authorization.RequestToken do
         audience: audience,
         grant_type: grant_type
       }) do
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = [{"Content-Type", "application/json"}]
 
@@ -38,6 +37,6 @@ defmodule PomeloEx.General.Authorization.RequestToken do
         grant_type: grant_type
       })
 
-    HTTPoison.post("#{url}/oauth/token", body, headers)
+    PomeloEx.Client.request(:post, "/oauth/token", body, headers)
   end
 end

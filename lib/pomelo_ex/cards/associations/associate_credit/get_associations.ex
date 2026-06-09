@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit.GetAssociations do
   alias PomeloEx.Types.Cards.Associations.AssociateCredit.GetAssociationsType
 
   def execute(%GetAssociationsType{token: token, id: id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/lending/v1/associations/#{id}", headers)
+    PomeloEx.Client.request(:get, "/lending/v1/associations/#{id}", nil, headers)
   end
 
   defp build_headers(token) do

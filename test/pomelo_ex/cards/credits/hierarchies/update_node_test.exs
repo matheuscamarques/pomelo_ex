@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.Hierarchies.UpdateNodeTest do
   test "Success 200 - Update Node" do
     payload = HierarchiesFixtures.update_node_request()
 
-    expect(HTTPMock, :patch, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/hierarchies/hie-2HMwKzetERdOEhbT86UweXamPle/nodes/nod-2HMwKzetERdOEhbT86UweXamPle"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.Hierarchies.UpdateNodeTest do
       assert sent_body["status"] == "ACTIVE"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: HierarchiesFixtures.update_node_response()
        }}
     end)

@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.Allocations.CancelAllocationTest do
   test "Success 200 - Cancel Allocation" do
     payload = AllocationsFixtures.cancel_allocation_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/collections/lco-edeESDira4dpZv8nZ6vwMb8Kjyf/cancel"
@@ -16,8 +16,8 @@ defmodule PomeloEx.Cards.Credits.Allocations.CancelAllocationTest do
       assert body == ""
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: AllocationsFixtures.cancel_allocation_response()
        }}
     end)

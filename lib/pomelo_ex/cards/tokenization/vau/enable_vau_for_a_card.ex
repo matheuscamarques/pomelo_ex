@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.VAU.EnableVauForACard do
   alias PomeloEx.Types.Cards.Tokenization.VAU.EnableVauForACardType
 
   def execute(%EnableVauForACardType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Cards.Tokenization.VAU.EnableVauForACard do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/pan-lifecycle/vau-opt-in", body, headers)
+    PomeloEx.Client.request(:post, "/pan-lifecycle/vau-opt-in", body, headers)
   end
 
   defp build_headers(token) do

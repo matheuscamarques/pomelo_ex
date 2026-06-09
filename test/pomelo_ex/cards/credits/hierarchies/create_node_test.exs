@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.Hierarchies.CreateNodeTest do
   test "Success 201 - Create Node" do
     payload = HierarchiesFixtures.create_node_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/hierarchies/hie-2HMwKzetERdOEhbT86UweXamPle/nodes"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.Hierarchies.CreateNodeTest do
       assert sent_body["type"] == "COMPANY_AREA"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: HierarchiesFixtures.create_node_response()
        }}
     end)

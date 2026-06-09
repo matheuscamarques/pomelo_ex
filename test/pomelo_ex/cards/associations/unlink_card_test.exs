@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Associations.Associations.UnlinkCardTest do
   test "Success 200 - Unlink Card" do
     payload = AccountAssociationsFixtures.unlink_card_request()
 
-    expect(HTTPMock, :delete, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :delete, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/cards/associations/v1/"
 
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Associations.Associations.UnlinkCardTest do
       assert sent_body["account_id"] == "acc-20I5vMjljS3VEyafcX8lA3T3g0c"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: AccountAssociationsFixtures.unlink_card_response()
        }}
     end)

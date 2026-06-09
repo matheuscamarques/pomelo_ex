@@ -4,8 +4,6 @@ defmodule PomeloEx.Identity.KYB.SearchSession do
   alias PomeloEx.Types.Identity.KYB.SearchSessionType
 
   def execute(%SearchSessionType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Identity.KYB.SearchSession do
       |> to_query_params()
       |> URI.encode_query()
 
-    http_client.get("#{url}/identity/v1/sessions?#{params}", headers)
+    PomeloEx.Client.request(:get, "/identity/v1/sessions?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

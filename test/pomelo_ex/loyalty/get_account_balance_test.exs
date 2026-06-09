@@ -8,14 +8,14 @@ defmodule PomeloEx.Loyalty.GetAccountBalanceTest do
   test "Success 200 - Get Account Balance" do
     payload = LoyaltyFixtures.get_account_balance_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/loyalty/v1/accounts/balance?card_id=card_123456"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: LoyaltyFixtures.get_account_balance_response()
        }}
     end)

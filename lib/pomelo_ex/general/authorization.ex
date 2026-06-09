@@ -29,7 +29,7 @@ defmodule PomeloEx.General.Authorization do
   ## Examples
 
       # With default credentials from config
-      {:ok, %HTTPoison.Response{body: %{"access_token" => token}}} =
+      {:ok, %PomeloEx.Adapter.Response{body: %{"access_token" => token}}} =
         PomeloEx.General.Authorization.request_token()
   """
   def request_token() do

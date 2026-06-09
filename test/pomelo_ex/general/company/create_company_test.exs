@@ -8,12 +8,12 @@ defmodule PomeloEx.General.Company.CreateCompanyTest do
   test "Success 201 - Create Company" do
     payload = CompaniesFixtures.create_company_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/companies/v1/"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: CompaniesFixtures.create_company_response()
        }}
     end)

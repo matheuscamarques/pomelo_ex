@@ -8,12 +8,12 @@ defmodule PomeloEx.Cards.Issuing.Cards.CreateCardTest do
   test "Success 201 - Create Card" do
     payload = CardsFixtures.create_card_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/cards/v1/"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: CardsFixtures.create_card_response()
        }}
     end)

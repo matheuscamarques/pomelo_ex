@@ -8,7 +8,7 @@ defmodule PomeloEx.Fraud.SoftBlock.UpdateSoftBlockTest do
   test "Success 200 - Update Soft Block" do
     payload = SoftBlockFixtures.update_soft_block_request()
 
-    expect(HTTPMock, :put, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :put, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/fraud/merchant/softblock"
 
@@ -16,8 +16,8 @@ defmodule PomeloEx.Fraud.SoftBlock.UpdateSoftBlockTest do
       assert sent_body["merchant_name"] == "FACEBOOK*12345"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: SoftBlockFixtures.update_soft_block_response()
        }}
     end)

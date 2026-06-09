@@ -4,8 +4,6 @@ defmodule PomeloEx.Loyalty.GetAccountBalance do
   alias PomeloEx.Types.Loyalty.GetAccountBalanceType
 
   def execute(%GetAccountBalanceType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Loyalty.GetAccountBalance do
       |> Map.new()
       |> URI.encode_query()
 
-    http_client.get("#{url}/loyalty/v1/accounts/balance?#{params}", headers)
+    PomeloEx.Client.request(:get, "/loyalty/v1/accounts/balance?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

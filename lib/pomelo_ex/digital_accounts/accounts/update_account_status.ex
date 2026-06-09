@@ -4,8 +4,6 @@ defmodule PomeloEx.DigitalAccounts.Accounts.UpdateAccountStatus do
   alias PomeloEx.Types.DigitalAccounts.Accounts.UpdateAccountStatusType
 
   def execute(%UpdateAccountStatusType{token: token, id: id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -14,7 +12,7 @@ defmodule PomeloEx.DigitalAccounts.Accounts.UpdateAccountStatus do
       |> Map.drop([:token, :id])
       |> Jason.encode!()
 
-    http_client.patch("#{url}/core/accounts/v1/#{id}", body, headers)
+    PomeloEx.Client.request(:patch, "/core/accounts/v1/#{id}", body, headers)
   end
 
   defp build_headers(token) do

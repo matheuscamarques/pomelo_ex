@@ -4,13 +4,11 @@ defmodule PomeloEx.Fraud.TransactionalBlock.CreateBlock do
   alias PomeloEx.Types.Fraud.TransactionalBlock.CreateBlockType
 
   def execute(%CreateBlockType{token: token, type: type, body: body}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body = body |> Jason.encode!()
 
-    http_client.post("#{url}/fraud/#{type}/block", body, headers)
+    PomeloEx.Client.request(:post, "/fraud/#{type}/block", body, headers)
   end
 
   defp build_headers(token) do

@@ -4,8 +4,6 @@ defmodule PomeloEx.General.Users.SearchUser do
   alias PomeloEx.Types.General.Users.SearchUserType
 
   def execute(%SearchUserType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -14,7 +12,7 @@ defmodule PomeloEx.General.Users.SearchUser do
       |> to_query_params()
       |> URI.encode_query()
 
-    http_client.get("#{url}/users/v1/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/users/v1/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

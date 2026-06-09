@@ -8,13 +8,13 @@ defmodule PomeloEx.Identity.KYC.SearchSessionTest do
   test "Success 200 - Search Session" do
     payload = KYCFixtures.search_session_request(%{filter_status: "IN_PROGRESS"})
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url =~ Application.get_env(:pomelo_ex, :url) <> "/identity/v1/sessions"
       assert url =~ "filter%5Bstatus%5D=IN_PROGRESS"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: KYCFixtures.search_sessions_response()
        }}
     end)

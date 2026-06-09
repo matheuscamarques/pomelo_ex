@@ -4,12 +4,10 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.ModifyPricing do
   alias PomeloEx.Types.Cards.Credits.CreditLinesV2.ModifyPricingType
 
   def execute(%ModifyPricingType{token: token, product_id: product_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
     body = payload.body |> Jason.encode!()
 
-    http_client.patch("#{url}/lending/v2/products/#{product_id}/pricing", body, headers)
+    PomeloEx.Client.request(:patch, "/lending/v2/products/#{product_id}/pricing", body, headers)
   end
 
   defp build_headers(token) do

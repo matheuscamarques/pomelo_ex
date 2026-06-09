@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.CancelCreditLineTest do
   test "Success 200 - Cancel Credit Line" do
     payload = CreditLinesV2Fixtures.cancel_credit_line_request()
 
-    expect(HTTPMock, :delete, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :delete, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v2/credit-lines/lcr-v2-credit-line-id"
@@ -18,8 +18,8 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.CancelCreditLineTest do
       assert sent_body["debt_acceleration"] == true
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesV2Fixtures.cancel_credit_line_response()
        }}
     end)

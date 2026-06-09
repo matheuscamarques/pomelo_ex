@@ -8,12 +8,12 @@ defmodule PomeloEx.Cards.Issuing.Shipments.SearchShipmentTest do
   test "Success 200 - Search Shipments" do
     payload = ShipmentsFixtures.search_shipment_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url =~ Application.get_env(:pomelo_ex, :url) <> "/shipping/v1/?"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: ShipmentsFixtures.search_shipment_response()
        }}
     end)

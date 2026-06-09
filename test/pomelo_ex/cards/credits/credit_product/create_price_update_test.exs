@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.CreatePriceUpdateTest do
   test "Success 201 - Create Price Update" do
     payload = CreditProductFixtures.create_price_update_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/products/lpr-2HMvSzWjc5La6WDTlgFweXAmPle/pricing"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.CreatePriceUpdateTest do
       assert sent_body["start_date"] == "2024-01-15"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: CreditProductFixtures.create_price_update_response()
        }}
     end)

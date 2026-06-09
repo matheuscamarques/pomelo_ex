@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Issuing.Cards.UpdateCardBatchShipping do
   alias PomeloEx.Types.Cards.Issuing.UpdateCardBatchShippingType
 
   def execute(%UpdateCardBatchShippingType{token: token, shipment_id: shipment_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Cards.Issuing.Cards.UpdateCardBatchShipping do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.patch("#{url}/cards/v1/batches/shipments/#{shipment_id}", body, headers)
+    PomeloEx.Client.request(:patch, "/cards/v1/batches/shipments/#{shipment_id}", body, headers)
   end
 
   defp build_headers(token) do

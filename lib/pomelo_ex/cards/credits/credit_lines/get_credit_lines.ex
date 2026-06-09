@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Credits.CreditLines.GetCreditLines do
   alias PomeloEx.Types.Cards.Credits.CreditLines.GetCreditLinesType
 
   def execute(%GetCreditLinesType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Cards.Credits.CreditLines.GetCreditLines do
       |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
       |> Enum.join("&")
 
-    http_client.get("#{url}/lending/v1/credit-lines/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/lending/v1/credit-lines/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

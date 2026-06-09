@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Issuing.Cards.GetCard do
   alias PomeloEx.Types.Cards.Issuing.GetCardType
 
   def execute(%GetCardType{token: token, id: id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/cards/v1/#{id}", headers)
+    PomeloEx.Client.request(:get, "/cards/v1/#{id}", nil, headers)
   end
 
   defp build_headers(token) do

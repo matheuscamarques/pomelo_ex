@@ -5,8 +5,6 @@ defmodule PomeloEx.Identity.KYB.CreateSessionAdditional do
   alias PomeloEx.Types.Identity.KYB.CreateSessionAdditionalType
 
   def execute(%CreateSessionAdditionalType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Identity.KYB.CreateSessionAdditional do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/identity/v2/sessions", body, headers)
+    PomeloEx.Client.request(:post, "/identity/v2/sessions", body, headers)
   end
 
   defp build_headers(token) do

@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Tokenization.VAU.NotifyCardholderContactTest do
   test "Success 200 - Notify Cardholder Contact" do
     payload = VAUFixtures.notify_cardholder_contact_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/pan-lifecycle/contact-cardholder"
 
       decoded_body = Jason.decode!(body)
@@ -16,8 +16,8 @@ defmodule PomeloEx.Cards.Tokenization.VAU.NotifyCardholderContactTest do
       assert decoded_body["operator_id"] == payload.operator_id
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: VAUFixtures.vau_success_response()
        }}
     end)

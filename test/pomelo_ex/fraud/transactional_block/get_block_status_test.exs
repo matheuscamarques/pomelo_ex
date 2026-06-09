@@ -8,14 +8,14 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockStatusTest do
   test "Success 200 - Get Block Status" do
     payload = TransactionalBlockFixtures.get_block_status_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/merchant_id/block/123456799999"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TransactionalBlockFixtures.get_block_status_response()
        }}
     end)

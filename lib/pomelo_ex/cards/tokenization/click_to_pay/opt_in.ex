@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.ClickToPay.OptIn do
   alias PomeloEx.Types.Cards.Tokenization.ClickToPay.OptInType
 
   def execute(%OptInType{token: token, card_id: card_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Cards.Tokenization.ClickToPay.OptIn do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/tokenization/v1/cards/#{card_id}/click-to-pay", body, headers)
+    PomeloEx.Client.request(:post, "/tokenization/v1/cards/#{card_id}/click-to-pay", body, headers)
   end
 
   defp build_headers(token) do

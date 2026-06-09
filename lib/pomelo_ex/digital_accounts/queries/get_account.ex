@@ -4,11 +4,9 @@ defmodule PomeloEx.DigitalAccounts.Queries.GetAccount do
   alias PomeloEx.Types.DigitalAccounts.Queries.GetAccountType
 
   def execute(%GetAccountType{token: token, id: id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/core/accounts/v1/#{id}", headers)
+    PomeloEx.Client.request(:get, "/core/accounts/v1/#{id}", nil, headers)
   end
 
   defp build_headers(token) do

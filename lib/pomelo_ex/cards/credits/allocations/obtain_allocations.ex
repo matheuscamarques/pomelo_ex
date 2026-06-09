@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Credits.Allocations.ObtainAllocations do
   alias PomeloEx.Types.Cards.Credits.Allocations.ObtainAllocationsType
 
   def execute(%ObtainAllocationsType{token: token, filter_credit_line_id: filter_credit_line_id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/lending/v1/collections/?filter[credit_line_id]=#{filter_credit_line_id}", headers)
+    PomeloEx.Client.request(:get, "/lending/v1/collections/?filter[credit_line_id]=#{filter_credit_line_id}", nil, headers)
   end
 
   defp build_headers(token) do

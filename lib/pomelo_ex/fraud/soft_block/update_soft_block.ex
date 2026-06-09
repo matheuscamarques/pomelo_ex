@@ -4,8 +4,6 @@ defmodule PomeloEx.Fraud.SoftBlock.UpdateSoftBlock do
   alias PomeloEx.Types.Fraud.SoftBlock.UpdateSoftBlockType
 
   def execute(%UpdateSoftBlockType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Fraud.SoftBlock.UpdateSoftBlock do
       |> Map.new()
       |> Jason.encode!()
 
-    http_client.put("#{url}/fraud/merchant/softblock", body, headers)
+    PomeloEx.Client.request(:put, "/fraud/merchant/softblock", body, headers)
   end
 
   defp build_headers(token) do

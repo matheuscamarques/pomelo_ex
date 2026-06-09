@@ -4,8 +4,6 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockList do
   alias PomeloEx.Types.Fraud.TransactionalBlock.GetBlockListType
 
   def execute(%GetBlockListType{token: token, type: type} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockList do
       |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
       |> Enum.join("&")
 
-    http_client.get("#{url}/fraud/search/#{type}/block?#{params}", headers)
+    PomeloEx.Client.request(:get, "/fraud/search/#{type}/block?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

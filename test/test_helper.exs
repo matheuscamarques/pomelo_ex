@@ -1,3 +1,3 @@
 ExUnit.start()
 
-Mox.defmock(HTTPMock, for: HTTPoison.Base)
+Mox.defmock(PomeloEx.Adapter.Mock, for: PomeloEx.Adapter)

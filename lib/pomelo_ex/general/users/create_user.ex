@@ -5,8 +5,6 @@ defmodule PomeloEx.General.Users.CreateUser do
   alias PomeloEx.Types.General.Users.CreateUserType
 
   def execute(%CreateUserType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
@@ -16,7 +14,7 @@ defmodule PomeloEx.General.Users.CreateUser do
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/users/v1/", body, headers)
+    PomeloEx.Client.request(:post, "/users/v1/", body, headers)
   end
 
   defp build_headers(token) do

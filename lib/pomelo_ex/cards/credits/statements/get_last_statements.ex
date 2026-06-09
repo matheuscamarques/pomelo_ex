@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Credits.Statements.GetLastStatements do
   alias PomeloEx.Types.Cards.Credits.Statements.GetLastStatementsType
 
   def execute(%GetLastStatementsType{token: token, credit_line_id: credit_line_id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/lending/v1/credit-lines/#{credit_line_id}/statements/last", headers)
+    PomeloEx.Client.request(:get, "/lending/v1/credit-lines/#{credit_line_id}/statements/last", nil, headers)
   end
 
   defp build_headers(token) do

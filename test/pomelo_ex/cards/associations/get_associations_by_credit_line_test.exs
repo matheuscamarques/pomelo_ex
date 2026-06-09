@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit.GetAssociationsByCreditLin
   test "Success 200 - Get Associations by Credit Line" do
     payload = LineAssociationsFixtures.get_associations_by_credit_line_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/associations?filter[credit_line_id]=lcr-20MpN8vmIPj77ujhb9cS8ctstN2"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: LineAssociationsFixtures.get_associations_by_credit_line_response()
        }}
     end)

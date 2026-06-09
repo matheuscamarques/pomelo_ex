@@ -4,14 +4,12 @@ defmodule PomeloEx.Cards.Credits.CreditLines.ConfirmTotalDebtAcceleration do
   alias PomeloEx.Types.Cards.Credits.CreditLines.ConfirmTotalDebtAccelerationType
 
   def execute(%ConfirmTotalDebtAccelerationType{token: token, credit_line_id: credit_line_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
     body = payload.body |> Jason.encode!()
 
-    http_client.post("#{url}/lending/v1/credit-lines/#{credit_line_id}/debt/acceleration/total/confirmation", body, headers)
+    PomeloEx.Client.request(:post, "/lending/v1/credit-lines/#{credit_line_id}/debt/acceleration/total/confirmation", body, headers)
   end
 
   defp build_headers(token) do

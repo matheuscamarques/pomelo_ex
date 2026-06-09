@@ -8,12 +8,12 @@ defmodule PomeloEx.Cards.Issuing.Cards.CreateBatchInnominateCardsTest do
   test "Success 201 - Create Batch Innominate Cards" do
     payload = CardsFixtures.create_batch_innominate_cards_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/cards/v1/batches"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: CardsFixtures.create_batch_innominate_cards_response()
        }}
     end)

@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Associations.Associations.LinkCardTest do
   test "Success 201 - Link Card" do
     payload = AccountAssociationsFixtures.link_card_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/cards/associations/v1/"
 
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Associations.Associations.LinkCardTest do
       assert sent_body["account_id"] == "acc-20I5vMjljS3VEyafcX8lA3T3g0c"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: AccountAssociationsFixtures.link_card_response()
        }}
     end)

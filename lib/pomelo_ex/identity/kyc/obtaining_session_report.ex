@@ -4,11 +4,9 @@ defmodule PomeloEx.Identity.KYC.ObtainingSessionReport do
   alias PomeloEx.Types.Identity.KYC.ObtainingSessionReportType
 
   def execute(%ObtainingSessionReportType{token: token, session_id: session_id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/identity/v1/sessions/#{session_id}/report", headers)
+    PomeloEx.Client.request(:get, "/identity/v1/sessions/#{session_id}/report", nil, headers)
   end
 
   defp build_headers(token) do

@@ -8,14 +8,14 @@ defmodule PomeloEx.Fraud.Chargebacks.ObtainChargebackTest do
   test "Success 200 - Obtain Chargeback" do
     payload = ChargebacksFixtures.obtain_chargeback_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/chargebacks/v2/cbk-1ab2c3d4"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: ChargebacksFixtures.obtain_chargeback_response()
        }}
     end)

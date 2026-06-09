@@ -8,14 +8,14 @@ defmodule PomeloEx.Fraud.TransactionalBlock.DeleteBlockTest do
   test "Success 200 - Delete Block" do
     payload = TransactionalBlockFixtures.delete_block_request()
 
-    expect(HTTPMock, :delete, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :delete, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/merchant_id/block/123456799999"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TransactionalBlockFixtures.delete_block_response()
        }}
     end)

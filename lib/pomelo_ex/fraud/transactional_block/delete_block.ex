@@ -4,11 +4,9 @@ defmodule PomeloEx.Fraud.TransactionalBlock.DeleteBlock do
   alias PomeloEx.Types.Fraud.TransactionalBlock.DeleteBlockType
 
   def execute(%DeleteBlockType{token: token, type: type, identifier: identifier}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.delete("#{url}/fraud/#{type}/block/#{identifier}", headers)
+    PomeloEx.Client.request(:delete, "/fraud/#{type}/block/#{identifier}", nil, headers)
   end
 
   defp build_headers(token) do

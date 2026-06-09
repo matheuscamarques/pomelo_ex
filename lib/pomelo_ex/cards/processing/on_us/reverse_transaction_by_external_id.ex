@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Processing.OnUs.ReverseTransactionByExternalId do
   alias PomeloEx.Types.Cards.Processing.OnUs.ReverseTransactionByExternalIdType
 
   def execute(%ReverseTransactionByExternalIdType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Cards.Processing.OnUs.ReverseTransactionByExternalId do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/on-us/v1/transactions/reverse", body, headers)
+    PomeloEx.Client.request(:post, "/on-us/v1/transactions/reverse", body, headers)
   end
 
   defp build_headers(token) do

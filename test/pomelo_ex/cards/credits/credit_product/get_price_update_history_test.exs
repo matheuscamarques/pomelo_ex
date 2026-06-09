@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.GetPriceUpdateHistoryTest do
   test "Success 200 - Get Price Update History" do
     payload = CreditProductFixtures.get_price_update_history_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/products/lpr-2HMvSzWjc5La6WDTlgFweXAmPle/pricing"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditProductFixtures.get_price_update_history_response()
        }}
     end)

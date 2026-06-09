@@ -8,14 +8,14 @@ defmodule PomeloEx.Identity.KYB.GetSessionTest do
   test "Success 200 - Get Session" do
     payload = KYBFixtures.get_session_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/identity/v1/sessions/#{payload.session_id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: KYBFixtures.get_session_response()
        }}
     end)

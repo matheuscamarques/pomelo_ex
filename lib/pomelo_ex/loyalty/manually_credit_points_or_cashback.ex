@@ -4,8 +4,6 @@ defmodule PomeloEx.Loyalty.ManuallyCreditPointsOrCashback do
   alias PomeloEx.Types.Loyalty.ManuallyCreditPointsOrCashbackType
 
   def execute(%ManuallyCreditPointsOrCashbackType{token: token, account_type: account_type} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
@@ -15,7 +13,7 @@ defmodule PomeloEx.Loyalty.ManuallyCreditPointsOrCashback do
       |> Map.drop([:token, :account_type])
       |> Jason.encode!()
 
-    http_client.post("#{url}/loyalty/v1/accounts/#{account_type}/mint", body, headers)
+    PomeloEx.Client.request(:post, "/loyalty/v1/accounts/#{account_type}/mint", body, headers)
   end
 
   defp build_headers(token) do

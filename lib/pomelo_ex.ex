@@ -31,7 +31,7 @@ defmodule PomeloEx do
   Obtain an access token via `PomeloEx.General.Authorization.request_token/0`:
 
   ```elixir
-  {:ok, %HTTPoison.Response{body: body}} = PomeloEx.General.Authorization.request_token()
+  {:ok, %PomeloEx.Adapter.Response{body: body}} = PomeloEx.General.Authorization.request_token()
   token = body["access_token"]
   ```
 
@@ -64,7 +64,7 @@ defmodule PomeloEx do
 
   | Key | Description | Default |
   |-----|-------------|---------|
-  | `:http_adapter` | HTTP client module | `HTTPoison` |
+  | `:http_adapter` | HTTP client module | `PomeloEx.Adapter.HTTPoison` |
   | `:url` | API base URL | — |
   | `:client_id` | OAuth client ID | — |
   | `:client_secret` | OAuth client secret | — |

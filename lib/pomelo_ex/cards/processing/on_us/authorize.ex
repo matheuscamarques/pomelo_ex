@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Processing.OnUs.Authorize do
   alias PomeloEx.Types.Cards.Processing.OnUs.AuthorizeType
 
   def execute(%AuthorizeType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Cards.Processing.OnUs.Authorize do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/on-us/v1/transactions/authorize", body, headers)
+    PomeloEx.Client.request(:post, "/on-us/v1/transactions/authorize", body, headers)
   end
 
   defp build_headers(token) do

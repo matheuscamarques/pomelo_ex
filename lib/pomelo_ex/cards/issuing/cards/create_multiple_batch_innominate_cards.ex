@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Issuing.Cards.CreateMultipleBatchInnominateCards do
   alias PomeloEx.Types.Cards.Issuing.CreateMultipleBatchInnominateCardsType
 
   def execute(%CreateMultipleBatchInnominateCardsType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Cards.Issuing.Cards.CreateMultipleBatchInnominateCards do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/cards/v1/batches/bulk", body, headers)
+    PomeloEx.Client.request(:post, "/cards/v1/batches/bulk", body, headers)
   end
 
   defp build_headers(token) do

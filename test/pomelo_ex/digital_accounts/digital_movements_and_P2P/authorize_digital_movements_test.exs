@@ -8,12 +8,12 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMoveme
   test "Success 201 - Authorize Digital Movements" do
     payload = DigitalMovementsAndP2PFixtures.authorize_digital_movements_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/core/transactions/v1"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: DigitalMovementsAndP2PFixtures.authorize_digital_movements_response()
        }}
     end)

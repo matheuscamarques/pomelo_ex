@@ -8,7 +8,7 @@ defmodule PomeloEx.Fraud.TransactionalBlock.CreateBlockTest do
   test "Success 200 - Create Block" do
     payload = TransactionalBlockFixtures.create_block_request()
 
-    expect(HTTPMock, :post, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/fraud/merchant_id/block"
 
@@ -17,8 +17,8 @@ defmodule PomeloEx.Fraud.TransactionalBlock.CreateBlockTest do
       assert sent_body["expiration_date"] == "3000-01-01T13:40:23Z"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TransactionalBlockFixtures.create_block_response()
        }}
     end)

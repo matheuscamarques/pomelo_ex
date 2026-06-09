@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.SuspendToken do
   alias PomeloEx.Types.Cards.Tokenization.SuspendTokenType
 
   def execute(%SuspendTokenType{token: token, external_token_id: external_token_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -17,8 +15,8 @@ defmodule PomeloEx.Cards.Tokenization.SuspendToken do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post(
-      "#{url}/tokenization/v1/tokens/#{external_token_id}/suspension",
+    PomeloEx.Client.request(:post, 
+      "/tokenization/v1/tokens/#{external_token_id}/suspension",
       body,
       headers
     )

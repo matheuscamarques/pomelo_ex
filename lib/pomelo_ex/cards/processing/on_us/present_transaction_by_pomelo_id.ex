@@ -9,8 +9,6 @@ defmodule PomeloEx.Cards.Processing.OnUs.PresentTransactionByPomeloId do
           original_presentment_id: original_presentment_id
         } = payload
       ) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -22,8 +20,8 @@ defmodule PomeloEx.Cards.Processing.OnUs.PresentTransactionByPomeloId do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post(
-      "#{url}/on-us/v1/presentments/#{original_presentment_id}/reverse",
+    PomeloEx.Client.request(:post, 
+      "/on-us/v1/presentments/#{original_presentment_id}/reverse",
       body,
       headers
     )

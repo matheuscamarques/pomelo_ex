@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Tokenization.ClickToPay.GetStatusTest do
   test "Success 200 - Get Click to Pay Status" do
     payload = ClickToPayFixtures.get_status_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/tokenization/v1/cards/#{payload.card_id}/click-to-pay"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: ClickToPayFixtures.get_status_response()
        }}
     end)

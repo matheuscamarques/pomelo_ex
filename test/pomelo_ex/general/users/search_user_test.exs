@@ -6,12 +6,12 @@ defmodule PomeloEx.General.Users.SearchUserTest do
   alias PomeloEx.General.UsersFixtures
 
   test "Success 200 - Search User" do
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/users/v1/?"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: UsersFixtures.search_user_response()
        }}
     end)

@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Tokenization.GetTokensByCardIdTest do
   test "Success 200 - Get Tokens by Card ID" do
     payload = TokenizationFixtures.get_tokens_by_card_id_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url =~
                Application.get_env(:pomelo_ex, :url) <>
                  "/tokenization/v1/cards/#{payload.external_card_id}/tokens"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TokenizationFixtures.get_tokens_by_card_id_response()
        }}
     end)

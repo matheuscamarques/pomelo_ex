@@ -8,14 +8,14 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalanceTe
   test "Success 200 - Update Account Balance" do
     payload = DigitalMovementsAndP2PFixtures.update_account_balance_request()
 
-    expect(HTTPMock, :patch, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/core/accounts/v1/#{payload.account_id}/balance"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: DigitalMovementsAndP2PFixtures.update_account_balance_response()
        }}
     end)

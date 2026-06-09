@@ -4,8 +4,6 @@ defmodule PomeloEx.DigitalAccounts.Queries.ListActivities do
   alias PomeloEx.Types.DigitalAccounts.Queries.ListActivitiesType
 
   def execute(%ListActivitiesType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -14,7 +12,7 @@ defmodule PomeloEx.DigitalAccounts.Queries.ListActivities do
       |> to_query_params()
       |> URI.encode_query()
 
-    http_client.get("#{url}/core/activities/v1/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/core/activities/v1/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.GetProduct do
   alias PomeloEx.Types.Cards.Credits.CreditLinesV2.GetProductType
 
   def execute(%GetProductType{token: token, id: id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/lending/v2/products/#{id}", headers)
+    PomeloEx.Client.request(:get, "/lending/v2/products/#{id}", nil, headers)
   end
 
   defp build_headers(token) do

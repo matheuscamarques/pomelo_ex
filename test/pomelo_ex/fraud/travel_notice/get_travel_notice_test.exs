@@ -8,14 +8,14 @@ defmodule PomeloEx.Fraud.TravelNotice.GetTravelNoticeTest do
   test "Success 200 - Get Travel Notice" do
     payload = TravelNoticeFixtures.get_travel_notice_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/travel_notice/v1/user/usr-12345"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: TravelNoticeFixtures.get_travel_notice_response()
        }}
     end)

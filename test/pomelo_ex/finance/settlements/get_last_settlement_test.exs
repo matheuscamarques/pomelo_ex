@@ -8,13 +8,13 @@ defmodule PomeloEx.Finance.Settlements.GetLastSettlementTest do
   test "Success 200 - Get Last Settlement" do
     payload = SettlementsFixtures.get_last_settlement_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/finance/v1/settlements/latest?country=ARG"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: SettlementsFixtures.get_last_settlement_response()
        }}
     end)

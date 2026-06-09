@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Issuing.Shipments.RequestReceiverData do
   alias PomeloEx.Types.Cards.Issuing.RequestReceiverDataType
 
   def execute(%RequestReceiverDataType{token: token, shipment_id: shipment_id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.post("#{url}/shipping/v1/#{shipment_id}/receiver", "{}", headers)
+    PomeloEx.Client.request(:post, "/shipping/v1/#{shipment_id}/receiver", "{}", headers)
   end
 
   defp build_headers(token) do

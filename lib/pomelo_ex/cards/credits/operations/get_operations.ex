@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Credits.Operations.GetOperations do
   alias PomeloEx.Types.Cards.Credits.Operations.GetOperationsType
 
   def execute(%GetOperationsType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Cards.Credits.Operations.GetOperations do
       |> to_query_params()
       |> URI.encode_query()
 
-    http_client.get("#{url}/operations/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/operations/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

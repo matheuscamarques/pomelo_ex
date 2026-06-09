@@ -4,11 +4,9 @@ defmodule PomeloEx.Cards.Issuing.Shipments.GetShipmentHistory do
   alias PomeloEx.Types.Cards.Issuing.GetShipmentHistoryType
 
   def execute(%GetShipmentHistoryType{token: token, shipment_id: shipment_id}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/shipping/v1/#{shipment_id}/history", headers)
+    PomeloEx.Client.request(:get, "/shipping/v1/#{shipment_id}/history", nil, headers)
   end
 
   defp build_headers(token) do

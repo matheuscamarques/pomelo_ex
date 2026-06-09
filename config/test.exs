@@ -1,6 +1,6 @@
 import Config
 
-config :pomelo_ex, :http_adapter, HTTPMock
+config :pomelo_ex, :http_adapter, PomeloEx.Adapter.Mock
 
 config :pomelo_ex,
   client_id: "Dj18v9G5flKCM4EFQMQtLSUrQhfrJKvC",

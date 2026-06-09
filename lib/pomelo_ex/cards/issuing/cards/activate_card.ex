@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Issuing.Cards.ActivateCard do
   alias PomeloEx.Types.Cards.Issuing.ActivateCardType
 
   def execute(%ActivateCardType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Cards.Issuing.Cards.ActivateCard do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/cards/v1/activation", body, headers)
+    PomeloEx.Client.request(:post, "/cards/v1/activation", body, headers)
   end
 
   defp build_headers(token) do

@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Associations.Associations.SearchAssociations do
   alias PomeloEx.Types.Cards.Associations.Associations.SearchAssociationsType
 
   def execute(%SearchAssociationsType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Cards.Associations.Associations.SearchAssociations do
       |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
       |> Enum.join("&")
 
-    http_client.get("#{url}/cards/associations/v1/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/cards/associations/v1/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

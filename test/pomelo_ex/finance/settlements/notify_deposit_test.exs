@@ -8,12 +8,12 @@ defmodule PomeloEx.Finance.Settlements.NotifyDepositTest do
   test "Success 201 - Notify Deposit" do
     payload = SettlementsFixtures.notify_deposit_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/finance/v1/deposits"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 201,
+       %PomeloEx.Adapter.Response{
+         status: 201,
          body: SettlementsFixtures.notify_deposit_response()
        }}
     end)

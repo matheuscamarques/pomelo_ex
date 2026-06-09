@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.CreditLines.UpdateCreditLineTest do
   test "Success 200 - Update Credit Line" do
     payload = CreditLinesFixtures.update_credit_line_request()
 
-    expect(HTTPMock, :patch, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/credit-lines/lcr-2HMwKzetERdOEhbT86UweXamPle"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.CreditLines.UpdateCreditLineTest do
       assert sent_body["status"] == "PAUSED"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesFixtures.update_credit_line_response()
        }}
     end)

@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.ModifyPricingTest do
   test "Success 200 - Modify Pricing" do
     payload = CreditLinesV2Fixtures.modify_pricing_request()
 
-    expect(HTTPMock, :patch, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v2/products/lpr-v2-product-id/pricing"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.ModifyPricingTest do
       assert sent_body["start_date"] == "2024-02-01"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesV2Fixtures.modify_pricing_response()
        }}
     end)

@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Issuing.Shipments.GetShipmentHistoryTest do
   test "Success 200 - Get Shipment History" do
     payload = ShipmentsFixtures.get_shipment_history_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/shipping/v1/#{payload.shipment_id}/history"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: ShipmentsFixtures.get_shipment_history_response()
        }}
     end)

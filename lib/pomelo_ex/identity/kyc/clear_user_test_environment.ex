@@ -4,8 +4,6 @@ defmodule PomeloEx.Identity.KYC.ClearUserTestEnvironment do
   alias PomeloEx.Types.Identity.KYC.ClearUserTestEnvironmentType
 
   def execute(%ClearUserTestEnvironmentType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -16,7 +14,7 @@ defmodule PomeloEx.Identity.KYC.ClearUserTestEnvironment do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.post("#{url}/clean_validations", body, headers)
+    PomeloEx.Client.request(:post, "/clean_validations", body, headers)
   end
 
   defp build_headers(token) do

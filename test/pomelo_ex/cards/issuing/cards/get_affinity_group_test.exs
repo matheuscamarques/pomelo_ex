@@ -8,13 +8,13 @@ defmodule PomeloEx.Cards.Issuing.Cards.GetAffinityGroupTest do
   test "Success 200 - Get Affinity Group" do
     payload = CardsFixtures.get_affinity_group_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <> "/config/affinity-groups/#{payload.id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CardsFixtures.get_affinity_group_response()
        }}
     end)

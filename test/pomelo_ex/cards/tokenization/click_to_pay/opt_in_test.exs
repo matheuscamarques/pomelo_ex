@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Tokenization.ClickToPay.OptInTest do
   test "Success 200 - Opt-in Click to Pay" do
     payload = ClickToPayFixtures.opt_in_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/tokenization/v1/cards/#{payload.card_id}/click-to-pay"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: ClickToPayFixtures.opt_in_response()
        }}
     end)

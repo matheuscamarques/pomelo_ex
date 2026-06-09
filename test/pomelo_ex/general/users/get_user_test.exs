@@ -8,12 +8,12 @@ defmodule PomeloEx.General.Users.GetUserTest do
   test "Success 200 - Get User" do
     payload = UsersFixtures.get_user_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/users/v1/#{payload.id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: UsersFixtures.get_user_response()
        }}
     end)

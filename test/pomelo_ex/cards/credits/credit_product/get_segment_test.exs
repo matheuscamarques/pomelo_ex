@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.GetSegmentTest do
   test "Success 200 - Get Segment" do
     payload = CreditProductFixtures.get_segment_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/products/lpr-2HMvSzWjc5La6WDTlgFweXAmPle/segments/lsg-3mkvSzWjc5La6WDTlgFweXAmP23"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditProductFixtures.get_segment_response()
        }}
     end)

@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.GetProducts do
   alias PomeloEx.Types.Cards.Credits.CreditProduct.GetProductsType
 
   def execute(%GetProductsType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.GetProducts do
       |> Map.new()
       |> URI.encode_query()
 
-    http_client.get("#{url}/lending/v1/products/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/lending/v1/products/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

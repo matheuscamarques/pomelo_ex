@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Credits.CreditLines.CreateCreditLine do
   alias PomeloEx.Types.Cards.Credits.CreditLines.CreateCreditLineType
 
   def execute(%CreateCreditLineType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
@@ -15,7 +13,7 @@ defmodule PomeloEx.Cards.Credits.CreditLines.CreateCreditLine do
       |> Map.drop([:token])
       |> Jason.encode!()
 
-    http_client.post("#{url}/lending/v1/credit-lines", body, headers)
+    PomeloEx.Client.request(:post, "/lending/v1/credit-lines", body, headers)
   end
 
   defp build_headers(token) do

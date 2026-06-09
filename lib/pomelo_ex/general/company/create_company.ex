@@ -5,8 +5,6 @@ defmodule PomeloEx.General.Company.CreateCompany do
   alias PomeloEx.Types.General.Companies.CreateCompanyType
 
   def execute(%CreateCompanyType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
@@ -16,7 +14,7 @@ defmodule PomeloEx.General.Company.CreateCompany do
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/companies/v1/", body, headers)
+    PomeloEx.Client.request(:post, "/companies/v1/", body, headers)
   end
 
   defp build_headers(token) do

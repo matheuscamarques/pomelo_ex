@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Issuing.Shipments.SearchShipment do
   alias PomeloEx.Types.Cards.Issuing.SearchShipmentType
 
   def execute(%SearchShipmentType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -14,7 +12,7 @@ defmodule PomeloEx.Cards.Issuing.Shipments.SearchShipment do
       |> to_query_params()
       |> URI.encode_query()
 
-    http_client.get("#{url}/shipping/v1/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/shipping/v1/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

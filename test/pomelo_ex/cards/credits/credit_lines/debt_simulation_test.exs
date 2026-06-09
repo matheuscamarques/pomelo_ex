@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Credits.CreditLines.DebtSimulationTest do
   test "Success 200 - Debt Simulation" do
     payload = CreditLinesFixtures.debt_simulation_request()
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v1/credit-lines/lcr-2HMwKzetERdOEhbT86UweXamPle/debt/simulation/?transaction_ids=ctx-1,ctx-2"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesFixtures.debt_simulation_response()
        }}
     end)

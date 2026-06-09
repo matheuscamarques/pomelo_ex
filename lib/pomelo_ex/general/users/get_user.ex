@@ -4,11 +4,9 @@ defmodule PomeloEx.General.Users.GetUser do
   alias PomeloEx.Types.General.Users.GetUserType
 
   def execute(%GetUserType{id: id, token: token}) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
-    http_client.get("#{url}/users/v1/#{id}", headers)
+    PomeloEx.Client.request(:get, "/users/v1/#{id}", nil, headers)
   end
 
   defp build_headers(token) do

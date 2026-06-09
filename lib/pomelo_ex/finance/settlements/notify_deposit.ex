@@ -4,8 +4,6 @@ defmodule PomeloEx.Finance.Settlements.NotifyDeposit do
   alias PomeloEx.Types.Finance.Settlements.NotifyDepositType
 
   def execute(%NotifyDepositType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
@@ -15,7 +13,7 @@ defmodule PomeloEx.Finance.Settlements.NotifyDeposit do
       |> Map.delete(:token)
       |> Jason.encode!()
 
-    http_client.post("#{url}/finance/v1/deposits", body, headers)
+    PomeloEx.Client.request(:post, "/finance/v1/deposits", body, headers)
   end
 
   defp build_headers(token) do

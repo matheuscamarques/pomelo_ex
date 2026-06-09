@@ -8,13 +8,13 @@ defmodule PomeloEx.General.Company.SearchCompaniesTest do
   test "Success 200 - Search Companies" do
     payload = CompaniesFixtures.search_companies_request(%{filter_status: "ACTIVE"})
 
-    expect(HTTPMock, :get, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url =~ Application.get_env(:pomelo_ex, :url) <> "/companies/v1/"
       assert url =~ "filter%5Bstatus%5D=ACTIVE"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CompaniesFixtures.search_companies_response()
        }}
     end)

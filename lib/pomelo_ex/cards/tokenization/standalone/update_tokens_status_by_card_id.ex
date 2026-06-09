@@ -4,8 +4,6 @@ defmodule PomeloEx.Cards.Tokenization.Standalone.UpdateTokensStatusByCardId do
   alias PomeloEx.Types.Cards.Tokenization.Standalone.UpdateTokensStatusByCardIdType
 
   def execute(%UpdateTokensStatusByCardIdType{token: token, card_id: card_id} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     body =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Cards.Tokenization.Standalone.UpdateTokensStatusByCardId do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    http_client.patch("#{url}/tokenization/v1/tokens/cards/#{card_id}", body, headers)
+    PomeloEx.Client.request(:patch, "/tokenization/v1/tokens/cards/#{card_id}", body, headers)
   end
 
   defp build_headers(token) do

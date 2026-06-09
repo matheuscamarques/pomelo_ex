@@ -8,14 +8,14 @@ defmodule PomeloEx.Cards.Tokenization.Standalone.UpdateTokensStatusByCardIdTest 
   test "Success 200 - Update Tokens Status by Card ID" do
     payload = StandaloneTokenizationFixtures.update_tokens_status_by_card_id_request()
 
-    expect(HTTPMock, :patch, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/tokenization/v1/tokens/cards/#{payload.card_id}"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: StandaloneTokenizationFixtures.update_tokens_status_by_card_id_response()
        }}
     end)

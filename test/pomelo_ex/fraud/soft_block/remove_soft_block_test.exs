@@ -8,14 +8,14 @@ defmodule PomeloEx.Fraud.SoftBlock.RemoveSoftBlockTest do
   test "Success 200 - Remove Soft Block" do
     payload = SoftBlockFixtures.remove_soft_block_request()
 
-    expect(HTTPMock, :delete, fn url, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :delete, url, _body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/merchant/softblock/FACEBOOK*12345"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: SoftBlockFixtures.remove_soft_block_response()
        }}
     end)

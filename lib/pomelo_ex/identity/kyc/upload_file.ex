@@ -10,8 +10,6 @@ defmodule PomeloEx.Identity.KYC.UploadFile do
         type_document: type_document,
         file_path: file_path
       }) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = [{"Authorization", "Bearer #{token}"}]
 
     body =
@@ -21,8 +19,8 @@ defmodule PomeloEx.Identity.KYC.UploadFile do
           {"form-data", [{"name", "file"}, {"filename", Path.basename(file_path)}]}, []}
        ]}
 
-    http_client.post(
-      "#{url}/identity/v1/sessions/#{session_id}/entities/#{user_id}/files/#{type_document}",
+    PomeloEx.Client.request(:post, 
+      "/identity/v1/sessions/#{session_id}/entities/#{user_id}/files/#{type_document}",
       body,
       headers
     )

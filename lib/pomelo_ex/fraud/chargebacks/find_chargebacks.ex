@@ -4,8 +4,6 @@ defmodule PomeloEx.Fraud.Chargebacks.FindChargebacks do
   alias PomeloEx.Types.Fraud.Chargebacks.FindChargebacksType
 
   def execute(%FindChargebacksType{token: token} = payload) do
-    http_client = Application.get_env(:pomelo_ex, :http_adapter)
-    url = Application.get_env(:pomelo_ex, :url)
     headers = build_headers(token)
 
     params =
@@ -17,7 +15,7 @@ defmodule PomeloEx.Fraud.Chargebacks.FindChargebacks do
       |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
       |> Enum.join("&")
 
-    http_client.get("#{url}/chargebacks/v2/?#{params}", headers)
+    PomeloEx.Client.request(:get, "/chargebacks/v2/?#{params}", nil, headers)
   end
 
   defp build_headers(token) do

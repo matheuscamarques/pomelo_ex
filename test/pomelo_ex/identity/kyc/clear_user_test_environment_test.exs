@@ -8,17 +8,17 @@ defmodule PomeloEx.Identity.KYC.ClearUserTestEnvironmentTest do
   test "Success 200 - Clear User Test Environment" do
     payload = KYCFixtures.clear_user_test_environment_request()
 
-    expect(HTTPMock, :post, fn url, _body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :post, url, _body, _headers ->
       assert url == Application.get_env(:pomelo_ex, :url) <> "/clean_validations"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: "{}"
        }}
     end)
 
     {:ok, response} = ClearUserTestEnvironment.execute(payload)
-    assert response.status_code == 200
+    assert response.status == 200
   end
 end

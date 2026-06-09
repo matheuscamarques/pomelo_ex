@@ -8,7 +8,7 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.UpdateSegmentTest do
   test "Success 200 - Update Segment" do
     payload = CreditLinesV2Fixtures.update_segment_request()
 
-    expect(HTTPMock, :patch, fn url, body, _headers ->
+    expect(PomeloEx.Adapter.Mock, :request, fn :patch, url, body, _headers ->
       assert url ==
                Application.get_env(:pomelo_ex, :url) <>
                  "/lending/v2/products/lpr-v2-product-id/segments/lseg-v2-segment-id"
@@ -17,8 +17,8 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2.UpdateSegmentTest do
       assert sent_body["name"] == "Standard Segment"
 
       {:ok,
-       %HTTPoison.Response{
-         status_code: 200,
+       %PomeloEx.Adapter.Response{
+         status: 200,
          body: CreditLinesV2Fixtures.update_segment_response()
        }}
     end)
