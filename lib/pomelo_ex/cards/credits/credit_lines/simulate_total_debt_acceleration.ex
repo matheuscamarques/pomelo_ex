@@ -1,21 +1,15 @@
-defmodule PomeloEx.Cards.Credits.CreditLines.CreateCreditLine do
+defmodule PomeloEx.Cards.Credits.CreditLines.SimulateTotalDebtAcceleration do
   @moduledoc false
 
-  alias PomeloEx.Types.Cards.Credits.CreditLines.CreateCreditLineType
+  alias PomeloEx.Types.Cards.Credits.CreditLines.SimulateTotalDebtAccelerationType
 
-  def execute(%CreateCreditLineType{token: token} = payload) do
+  def execute(%SimulateTotalDebtAccelerationType{token: token, credit_line_id: credit_line_id}) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
 
     headers = build_headers(token)
 
-    body =
-      payload
-      |> Map.from_struct()
-      |> Map.drop([:token])
-      |> Jason.encode!()
-
-    http_client.post("#{url}/lending/v1/credit-lines", body, headers)
+    http_client.post("#{url}/lending/v1/credit-lines/#{credit_line_id}/debt/acceleration/total/simulation", "", headers)
   end
 
   defp build_headers(token) do
