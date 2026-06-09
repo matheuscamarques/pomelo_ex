@@ -1,9 +1,9 @@
-defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMovements do
+defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalance do
   @moduledoc false
 
-  alias PomeloEx.Types.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMovementsType
+  alias PomeloEx.Types.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalanceType
 
-  def execute(%AuthorizeDigitalMovementsType{token: token} = payload) do
+  def execute(%UpdateAccountBalanceType{token: token, account_id: account_id} = payload) do
     http_client = Application.get_env(:pomelo_ex, :http_adapter)
     url = Application.get_env(:pomelo_ex, :url)
 
@@ -12,10 +12,10 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMoveme
     body =
       payload
       |> Map.from_struct()
-      |> Map.delete(:token)
+      |> Map.drop([:token, :account_id])
       |> Jason.encode!()
 
-    http_client.post("#{url}/core/transactions/v1", body, headers)
+    http_client.patch("#{url}/core/accounts/v1/#{account_id}/balance", body, headers)
   end
 
   defp build_headers(token) do

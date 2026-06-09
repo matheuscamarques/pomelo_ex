@@ -2,6 +2,7 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P do
   @moduledoc false
   alias PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMovements
   alias PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeP2PTransaction
+  alias PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalance
 
   @doc """
   Authorize Digital Movements
@@ -14,4 +15,10 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P do
   El endpoint /core/transactions/v1/p2p te permite autorizar movimientos de terceros (P2P) de entrada y salida de dinero entre dos cuentas de Pomelo. Podrás consultar el resultado de la transacción en el campo result.
   """
   defdelegate authorize_P2P_transaction(payload), to: AuthorizeP2PTransaction, as: :execute
+
+  @doc """
+  Update account balance
+  The endpoint /core/accounts/v1/{accountId}/balance allows you to adjust an account's balance. It calculates whether it will be a credit or debit operation, creates an associated transaction, and updates the corresponding balance.
+  """
+  defdelegate update_account_balance(payload), to: UpdateAccountBalance, as: :execute
 end
