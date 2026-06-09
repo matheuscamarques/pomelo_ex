@@ -88,7 +88,7 @@ defmodule PomeloEx do
   - `PomeloEx.DigitalAccounts` — Digital account management
   - `PomeloEx.Finance.Settlements` — Settlement operations
   - `PomeloEx.Fraud` — Fraud prevention operations
-  - `PomeloEx.FraudPrevention` — Legacy fraud prevention
+
   - `PomeloEx.Loyalty` — Loyalty points and cashback
   """
 end

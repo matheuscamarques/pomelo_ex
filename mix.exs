@@ -38,7 +38,7 @@ defmodule PomeloEx.MixProject do
       "Digital Accounts": ~r/^PomeloEx\.DigitalAccounts/,
       "Finance": ~r/^PomeloEx\.Finance/,
       "Fraud": ~r/^PomeloEx\.Fraud/,
-      "Fraud Prevention": ~r/^PomeloEx\.FraudPrevention/,
+
       "Loyalty": ~r/^PomeloEx\.Loyalty/,
       "Types": ~r/^PomeloEx\.Types/
     ]
