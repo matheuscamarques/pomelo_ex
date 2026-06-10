@@ -64,7 +64,7 @@ defmodule PomeloEx do
 
   | Key | Description | Default |
   |-----|-------------|---------|
-  | `:http_adapter` | HTTP client module | `PomeloEx.Adapter.HTTPoison` |
+  | `:http_adapter` | HTTP client module | `"PomeloEx.Adapter.HTTPoison"` |
   | `:url` | API base URL | — |
   | `:client_id` | OAuth client ID | — |
   | `:client_secret` | OAuth client secret | — |
