@@ -19,7 +19,8 @@ defmodule PomeloEx.Cards.Credits.CreditLines.ConfirmAccelerationOfDebtForSpecifi
       {:ok,
        %PomeloEx.Adapter.Response{
          status: 200,
-         body: CreditLinesFixtures.confirm_acceleration_of_debt_for_specific_installments_response()
+         body:
+           CreditLinesFixtures.confirm_acceleration_of_debt_for_specific_installments_response()
        }}
     end)
 

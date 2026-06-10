@@ -2,8 +2,8 @@ defmodule PomeloEx.Cards.Associations.Associations.SearchAssociationsTest do
   use ExUnit.Case
   import Mox
 
-  alias PomeloEx.Cards.Associations.Associations.SearchAssociations
   alias PomeloEx.Cards.Associations.AccountAssociationsFixtures
+  alias PomeloEx.Cards.Associations.Associations.SearchAssociations
 
   test "Success 200 - Search Associations" do
     payload = AccountAssociationsFixtures.search_associations_request()

@@ -6,7 +6,12 @@ defmodule PomeloEx.Cards.Tokenization.ClickToPay.OptOut do
   def execute(%OptOutType{token: token, card_id: card_id}) do
     headers = build_headers(token)
 
-    PomeloEx.Client.request(:delete, "/tokenization/v1/cards/#{card_id}/click-to-pay", nil, headers)
+    PomeloEx.Client.request(
+      :delete,
+      "/tokenization/v1/cards/#{card_id}/click-to-pay",
+      nil,
+      headers
+    )
   end
 
   defp build_headers(token) do

@@ -3,11 +3,16 @@ defmodule PomeloEx.Cards.Credits.CreditLines.DebtSimulation do
 
   alias PomeloEx.Types.Cards.Credits.CreditLines.DebtSimulationType
 
-  def execute(%DebtSimulationType{token: token, credit_line_id: credit_line_id, transaction_ids: transaction_ids})
+  def execute(%DebtSimulationType{
+        token: token,
+        credit_line_id: credit_line_id,
+        transaction_ids: transaction_ids
+      })
       when not is_nil(transaction_ids) do
     headers = build_headers(token)
 
-    PomeloEx.Client.request(:get,
+    PomeloEx.Client.request(
+      :get,
       "/lending/v1/credit-lines/#{credit_line_id}/debt/simulation/?transaction_ids=#{transaction_ids}",
       nil,
       headers
@@ -17,7 +22,12 @@ defmodule PomeloEx.Cards.Credits.CreditLines.DebtSimulation do
   def execute(%DebtSimulationType{token: token, credit_line_id: credit_line_id}) do
     headers = build_headers(token)
 
-    PomeloEx.Client.request(:get, "/lending/v1/credit-lines/#{credit_line_id}/debt/simulation", nil, headers)
+    PomeloEx.Client.request(
+      :get,
+      "/lending/v1/credit-lines/#{credit_line_id}/debt/simulation",
+      nil,
+      headers
+    )
   end
 
   defp build_headers(token) do

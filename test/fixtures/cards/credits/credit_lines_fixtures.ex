@@ -1,6 +1,8 @@
 defmodule PomeloEx.Cards.Credits.CreditLinesFixtures do
   alias PomeloEx.Types.Cards.Credits.CreditLines.CancelCreditLineType
+
   alias PomeloEx.Types.Cards.Credits.CreditLines.ConfirmAccelerationOfDebtForSpecificInstallmentsType
+
   alias PomeloEx.Types.Cards.Credits.CreditLines.ConfirmDebtRefinancingType
   alias PomeloEx.Types.Cards.Credits.CreditLines.ConfirmTotalDebtAccelerationType
   alias PomeloEx.Types.Cards.Credits.CreditLines.CreateCreditLineType
@@ -82,7 +84,10 @@ defmodule PomeloEx.Cards.Credits.CreditLinesFixtures do
     %UpdateCreditLineType{
       token: "fRwX12Dg3345AD",
       id: "lcr-2HMwKzetERdOEhbT86UweXamPle",
-      body: %{"status" => "PAUSED", "status_detail" => %{"reason" => "FRAUD", "text" => "Additional information"}}
+      body: %{
+        "status" => "PAUSED",
+        "status_detail" => %{"reason" => "FRAUD", "text" => "Additional information"}
+      }
     }
   end
 
@@ -194,7 +199,11 @@ defmodule PomeloEx.Cards.Credits.CreditLinesFixtures do
     %SimulateDebtRefinancingType{
       token: "fRwX12Dg3345AD",
       credit_line_id: "lcr-2HMwKzetERdOEhbT86UweXamPle",
-      body: %{"type" => "TOTAL_DEBT", "credit_line_id" => "lcr-2HMwKzetERdOEhbT86UweXamPle", "installment_quantity" => 12}
+      body: %{
+        "type" => "TOTAL_DEBT",
+        "credit_line_id" => "lcr-2HMwKzetERdOEhbT86UweXamPle",
+        "installment_quantity" => 12
+      }
     }
   end
 
@@ -213,7 +222,11 @@ defmodule PomeloEx.Cards.Credits.CreditLinesFixtures do
     %ConfirmDebtRefinancingType{
       token: "fRwX12Dg3345AD",
       credit_line_id: "lcr-2HMwKzetERdOEhbT86UweXamPle",
-      body: %{"type" => "TOTAL_DEBT", "credit_line_id" => "lcr-2HMwKzetERdOEhbT86UweXamPle", "installment_quantity" => 12}
+      body: %{
+        "type" => "TOTAL_DEBT",
+        "credit_line_id" => "lcr-2HMwKzetERdOEhbT86UweXamPle",
+        "installment_quantity" => 12
+      }
     }
   end
 

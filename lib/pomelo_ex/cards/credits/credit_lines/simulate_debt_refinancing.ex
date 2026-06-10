@@ -3,13 +3,19 @@ defmodule PomeloEx.Cards.Credits.CreditLines.SimulateDebtRefinancing do
 
   alias PomeloEx.Types.Cards.Credits.CreditLines.SimulateDebtRefinancingType
 
-  def execute(%SimulateDebtRefinancingType{token: token, credit_line_id: credit_line_id} = payload) do
-
+  def execute(
+        %SimulateDebtRefinancingType{token: token, credit_line_id: credit_line_id} = payload
+      ) do
     headers = build_headers(token)
 
     body = payload.body |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, "/lending/v1/credit-lines/#{credit_line_id}/debt/refinance/simulation", body, headers)
+    PomeloEx.Client.request(
+      :post,
+      "/lending/v1/credit-lines/#{credit_line_id}/debt/refinance/simulation",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

@@ -19,7 +19,8 @@ defmodule PomeloEx.Identity.KYB.UploadFile do
           {"form-data", [{"name", "file"}, {"filename", Path.basename(file_path)}]}, []}
        ]}
 
-    PomeloEx.Client.request(:post, 
+    PomeloEx.Client.request(
+      :post,
       "/identity/v1/sessions/#{session_id}/entities/#{company_id}/files/#{type_document}",
       body,
       headers

@@ -4,7 +4,6 @@ defmodule PomeloEx.Finance.Settlements.NotifyDeposit do
   alias PomeloEx.Types.Finance.Settlements.NotifyDepositType
 
   def execute(%NotifyDepositType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

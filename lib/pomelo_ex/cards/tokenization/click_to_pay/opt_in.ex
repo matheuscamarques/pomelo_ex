@@ -15,7 +15,12 @@ defmodule PomeloEx.Cards.Tokenization.ClickToPay.OptIn do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, "/tokenization/v1/cards/#{card_id}/click-to-pay", body, headers)
+    PomeloEx.Client.request(
+      :post,
+      "/tokenization/v1/cards/#{card_id}/click-to-pay",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

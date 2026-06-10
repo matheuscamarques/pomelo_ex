@@ -4,7 +4,6 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMoveme
   alias PomeloEx.Types.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeDigitalMovementsType
 
   def execute(%AuthorizeDigitalMovementsType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

@@ -17,10 +17,10 @@ defmodule PomeloEx.Cards.Credits.CreditLines do
   5. Confirm debt operations via confirmation endpoints
   """
   alias PomeloEx.Cards.Credits.CreditLines.CancelCreditLine
-  alias PomeloEx.Cards.Credits.CreditLines.CreateCreditLine
   alias PomeloEx.Cards.Credits.CreditLines.ConfirmAccelerationOfDebtForSpecificInstallments
   alias PomeloEx.Cards.Credits.CreditLines.ConfirmDebtRefinancing
   alias PomeloEx.Cards.Credits.CreditLines.ConfirmTotalDebtAcceleration
+  alias PomeloEx.Cards.Credits.CreditLines.CreateCreditLine
   alias PomeloEx.Cards.Credits.CreditLines.DebtAcceleration
   alias PomeloEx.Cards.Credits.CreditLines.DebtSimulation
   alias PomeloEx.Cards.Credits.CreditLines.GetCreditLine
@@ -114,7 +114,9 @@ defmodule PomeloEx.Cards.Credits.CreditLines do
   Simulate expiration date update
   The /credit-lines/{credit_line_id}/config/due-date/simulation endpoint allows you to simulate a change in the due date of a credit line.
   """
-  defdelegate simulate_expiration_date_update(payload), to: SimulateExpirationDateUpdate, as: :execute
+  defdelegate simulate_expiration_date_update(payload),
+    to: SimulateExpirationDateUpdate,
+    as: :execute
 
   @doc """
   Update expiration date
@@ -150,25 +152,33 @@ defmodule PomeloEx.Cards.Credits.CreditLines do
   Simulate total debt acceleration
   The /credit-lines/{credit_line_id}/debt/acceleration/total/simulation endpoint allows you to simulate total debt acceleration for a credit line.
   """
-  defdelegate simulate_total_debt_acceleration(payload), to: SimulateTotalDebtAcceleration, as: :execute
+  defdelegate simulate_total_debt_acceleration(payload),
+    to: SimulateTotalDebtAcceleration,
+    as: :execute
 
   @doc """
   Confirm total debt acceleration
   The /credit-lines/{credit_line_id}/debt/acceleration/total/confirmation endpoint allows you to confirm and execute total debt acceleration for a credit line.
   """
-  defdelegate confirm_total_debt_acceleration(payload), to: ConfirmTotalDebtAcceleration, as: :execute
+  defdelegate confirm_total_debt_acceleration(payload),
+    to: ConfirmTotalDebtAcceleration,
+    as: :execute
 
   @doc """
   Simulate acceleration of specific installments
   The /credit-lines/{credit_line_id}/debt/acceleration/installments/simulation endpoint allows you to simulate acceleration of specific installment plans.
   """
-  defdelegate simulate_acceleration_of_specific_installments(payload), to: SimulateAccelerationOfSpecificInstallments, as: :execute
+  defdelegate simulate_acceleration_of_specific_installments(payload),
+    to: SimulateAccelerationOfSpecificInstallments,
+    as: :execute
 
   @doc """
   Confirm acceleration of debt for specific installments
   The /credit-lines/{credit_line_id}/debt/acceleration/installments/confirmation endpoint allows you to confirm and execute acceleration for specific installment plans.
   """
-  defdelegate confirm_acceleration_of_debt_for_specific_installments(payload), to: ConfirmAccelerationOfDebtForSpecificInstallments, as: :execute
+  defdelegate confirm_acceleration_of_debt_for_specific_installments(payload),
+    to: ConfirmAccelerationOfDebtForSpecificInstallments,
+    as: :execute
 
   @doc """
   Create price update

@@ -32,7 +32,7 @@ defmodule PomeloEx.General.Authorization do
       {:ok, %PomeloEx.Adapter.Response{body: %{"access_token" => token}}} =
         PomeloEx.General.Authorization.request_token()
   """
-  def request_token() do
+  def request_token do
     RequestToken.execute()
   end
 

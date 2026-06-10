@@ -25,7 +25,9 @@ defmodule PomeloEx.Loyalty do
 
   The account_type parameter specifies the type of account (e.g., "points").
   """
-  defdelegate manually_credit_points_or_cashback(payload), to: ManuallyCreditPointsOrCashback, as: :execute
+  defdelegate manually_credit_points_or_cashback(payload),
+    to: ManuallyCreditPointsOrCashback,
+    as: :execute
 
   @doc """
   Manually debit points or cashback
@@ -33,7 +35,9 @@ defmodule PomeloEx.Loyalty do
 
   The account_type parameter specifies the type of account (e.g., "points").
   """
-  defdelegate manually_debit_points_or_cashback(payload), to: ManuallyDebitPointsOrCashback, as: :execute
+  defdelegate manually_debit_points_or_cashback(payload),
+    to: ManuallyDebitPointsOrCashback,
+    as: :execute
 
   @doc """
   Get account balance
@@ -62,7 +66,9 @@ defmodule PomeloEx.Loyalty do
   Considerations
   - We expect a response in the 2XX range to ensure that you've received the notification.
   """
-  defdelegate points_confirmation_notification(payload), to: PointsConfirmationNotification, as: :execute
+  defdelegate points_confirmation_notification(payload),
+    to: PointsConfirmationNotification,
+    as: :execute
 
   @doc """
   Points cancellation notification
@@ -73,5 +79,7 @@ defmodule PomeloEx.Loyalty do
   Considerations
   - We expect a response in the 2XX range to ensure that you've received the notification.
   """
-  defdelegate points_cancellation_notification(payload), to: PointsCancellationNotification, as: :execute
+  defdelegate points_cancellation_notification(payload),
+    to: PointsCancellationNotification,
+    as: :execute
 end

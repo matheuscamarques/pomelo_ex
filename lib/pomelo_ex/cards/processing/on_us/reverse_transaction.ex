@@ -18,7 +18,8 @@ defmodule PomeloEx.Cards.Processing.OnUs.ReverseTransaction do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, 
+    PomeloEx.Client.request(
+      :post,
       "/on-us/v1/transactions/#{original_transaction_id}/reverse",
       body,
       headers

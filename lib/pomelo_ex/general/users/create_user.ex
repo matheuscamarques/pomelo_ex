@@ -5,7 +5,6 @@ defmodule PomeloEx.General.Users.CreateUser do
   alias PomeloEx.Types.General.Users.CreateUserType
 
   def execute(%CreateUserType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

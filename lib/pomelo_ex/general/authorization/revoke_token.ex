@@ -26,7 +26,6 @@ defmodule PomeloEx.General.Authorization.RevokeToken do
         audience: audience,
         grant_type: grant_type
       }) do
-
     headers = [{"Content-Type", "application/json"}]
 
     body =

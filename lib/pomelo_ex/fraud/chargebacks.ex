@@ -41,5 +41,7 @@ defmodule PomeloEx.Fraud.Chargebacks do
   @doc """
   Webhook handler for chargeback notifications.
   """
-  defdelegate chargeback_webhook_notification(payload), to: ChargebackWebhookNotification, as: :execute
+  defdelegate chargeback_webhook_notification(payload),
+    to: ChargebackWebhookNotification,
+    as: :execute
 end

@@ -3,13 +3,22 @@ defmodule PomeloEx.Cards.Credits.CreditLines.SimulateAccelerationOfSpecificInsta
 
   alias PomeloEx.Types.Cards.Credits.CreditLines.SimulateAccelerationOfSpecificInstallmentsType
 
-  def execute(%SimulateAccelerationOfSpecificInstallmentsType{token: token, credit_line_id: credit_line_id} = payload) do
-
+  def execute(
+        %SimulateAccelerationOfSpecificInstallmentsType{
+          token: token,
+          credit_line_id: credit_line_id
+        } = payload
+      ) do
     headers = build_headers(token)
 
     body = payload.body |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, "/lending/v1/credit-lines/#{credit_line_id}/debt/acceleration/installments/simulation", body, headers)
+    PomeloEx.Client.request(
+      :post,
+      "/lending/v1/credit-lines/#{credit_line_id}/debt/acceleration/installments/simulation",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

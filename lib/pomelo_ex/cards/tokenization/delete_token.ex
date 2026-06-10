@@ -15,7 +15,12 @@ defmodule PomeloEx.Cards.Tokenization.DeleteToken do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, "/tokenization/v1/tokens/#{external_token_id}/deletion", body, headers)
+    PomeloEx.Client.request(
+      :post,
+      "/tokenization/v1/tokens/#{external_token_id}/deletion",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

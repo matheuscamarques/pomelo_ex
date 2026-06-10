@@ -18,8 +18,15 @@ defmodule PomeloEx.Cards.Issuing do
   defdelegate activate_card(payload), to: Cards, as: :activate_card
   defdelegate card_events(payload), to: Cards, as: :card_events
   defdelegate update_card_shipping(payload), to: Cards, as: :update_card_shipping
-  defdelegate create_batch_innominate_cards(payload), to: Cards, as: :create_batch_innominate_cards
-  defdelegate create_multiple_batch_innominate_cards(payload), to: Cards, as: :create_multiple_batch_innominate_cards
+
+  defdelegate create_batch_innominate_cards(payload),
+    to: Cards,
+    as: :create_batch_innominate_cards
+
+  defdelegate create_multiple_batch_innominate_cards(payload),
+    to: Cards,
+    as: :create_multiple_batch_innominate_cards
+
   defdelegate update_card_batch_shipping(payload), to: Cards, as: :update_card_batch_shipping
   defdelegate get_affinity_group(payload), to: Cards, as: :get_affinity_group
   defdelegate create_shipment(payload), to: Shipments, as: :create_shipment

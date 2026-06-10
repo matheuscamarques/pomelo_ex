@@ -13,8 +13,14 @@ defmodule PomeloEx.Cards.Associations do
   alias PomeloEx.Cards.Associations.AssociateCredit
   alias PomeloEx.Cards.Associations.Associations
 
-  defdelegate associate_card_with_line_of_credit(payload), to: AssociateCredit, as: :associate_card_with_line_of_credit
-  defdelegate get_association_by_credit_line(payload), to: AssociateCredit, as: :get_association_by_credit_line
+  defdelegate associate_card_with_line_of_credit(payload),
+    to: AssociateCredit,
+    as: :associate_card_with_line_of_credit
+
+  defdelegate get_association_by_credit_line(payload),
+    to: AssociateCredit,
+    as: :get_association_by_credit_line
+
   defdelegate get_associations(payload), to: AssociateCredit, as: :get_associations
   defdelegate link_card(payload), to: Associations, as: :link_card
   defdelegate unlink_card(payload), to: Associations, as: :unlink_card

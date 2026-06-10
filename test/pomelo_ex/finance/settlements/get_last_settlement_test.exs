@@ -10,7 +10,8 @@ defmodule PomeloEx.Finance.Settlements.GetLastSettlementTest do
 
     expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
       assert url ==
-               Application.get_env(:pomelo_ex, :url) <> "/finance/v1/settlements/latest?country=ARG"
+               Application.get_env(:pomelo_ex, :url) <>
+                 "/finance/v1/settlements/latest?country=ARG"
 
       {:ok,
        %PomeloEx.Adapter.Response{

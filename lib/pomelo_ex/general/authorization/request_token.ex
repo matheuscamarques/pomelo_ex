@@ -26,7 +26,6 @@ defmodule PomeloEx.General.Authorization.RequestToken do
         audience: audience,
         grant_type: grant_type
       }) do
-
     headers = [{"Content-Type", "application/json"}]
 
     body =

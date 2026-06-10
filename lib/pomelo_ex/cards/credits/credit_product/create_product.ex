@@ -4,7 +4,6 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.CreateProduct do
   alias PomeloEx.Types.Cards.Credits.CreditProduct.CreateProductType
 
   def execute(%CreateProductType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body = payload.body |> Jason.encode!()

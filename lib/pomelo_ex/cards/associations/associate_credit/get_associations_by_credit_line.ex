@@ -11,8 +11,7 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit.GetAssociationsByCreditLin
       |> Map.from_struct()
       |> Map.delete(:token)
       |> Enum.map(&format_pair/1)
-      |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
-      |> Enum.join("&")
+      |> Enum.map_join("&", fn {k, v} -> "#{k}=#{v}" end)
 
     PomeloEx.Client.request(:get, "/lending/v1/associations?#{params}", nil, headers)
   end
@@ -24,5 +23,6 @@ defmodule PomeloEx.Cards.Associations.AssociateCredit.GetAssociationsByCreditLin
     ]
   end
 
-  defp format_pair({:filter_credit_line_id, value}), do: {"filter[credit_line_id]", to_string(value)}
+  defp format_pair({:filter_credit_line_id, value}),
+    do: {"filter[credit_line_id]", to_string(value)}
 end

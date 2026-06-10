@@ -2,8 +2,8 @@ defmodule PomeloEx.Cards.Associations.Associations.UnlinkCardTest do
   use ExUnit.Case
   import Mox
 
-  alias PomeloEx.Cards.Associations.Associations.UnlinkCard
   alias PomeloEx.Cards.Associations.AccountAssociationsFixtures
+  alias PomeloEx.Cards.Associations.Associations.UnlinkCard
 
   test "Success 200 - Unlink Card" do
     payload = AccountAssociationsFixtures.unlink_card_request()

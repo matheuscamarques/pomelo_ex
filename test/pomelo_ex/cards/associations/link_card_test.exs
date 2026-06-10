@@ -2,8 +2,8 @@ defmodule PomeloEx.Cards.Associations.Associations.LinkCardTest do
   use ExUnit.Case
   import Mox
 
-  alias PomeloEx.Cards.Associations.Associations.LinkCard
   alias PomeloEx.Cards.Associations.AccountAssociationsFixtures
+  alias PomeloEx.Cards.Associations.Associations.LinkCard
 
   test "Success 201 - Link Card" do
     payload = AccountAssociationsFixtures.link_card_request()

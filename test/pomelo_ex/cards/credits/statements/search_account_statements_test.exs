@@ -9,7 +9,11 @@ defmodule PomeloEx.Cards.Credits.Statements.SearchAccountStatementsTest do
     payload = StatementsFixtures.search_account_statements_request()
 
     expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
-      assert String.contains?(url, "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/")
+      assert String.contains?(
+               url,
+               "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/"
+             )
+
       assert String.contains?(url, "filter[status]=CREATED")
       assert String.contains?(url, "filter[period][from]=2023-03")
       assert String.contains?(url, "filter[period][to]=2023-04")

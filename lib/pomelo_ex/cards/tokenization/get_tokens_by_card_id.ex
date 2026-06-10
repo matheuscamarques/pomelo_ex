@@ -13,7 +13,12 @@ defmodule PomeloEx.Cards.Tokenization.GetTokensByCardId do
       |> to_query_params()
       |> URI.encode_query()
 
-    PomeloEx.Client.request(:get, "/tokenization/v1/cards/#{external_card_id}/tokens?#{params}", nil, headers)
+    PomeloEx.Client.request(
+      :get,
+      "/tokenization/v1/cards/#{external_card_id}/tokens?#{params}",
+      nil,
+      headers
+    )
   end
 
   defp build_headers(token) do

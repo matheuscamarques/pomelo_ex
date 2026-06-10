@@ -3,12 +3,19 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.UpdateSegment do
 
   alias PomeloEx.Types.Cards.Credits.CreditProduct.UpdateSegmentType
 
-  def execute(%UpdateSegmentType{token: token, product_id: product_id, segment_id: segment_id} = payload) do
+  def execute(
+        %UpdateSegmentType{token: token, product_id: product_id, segment_id: segment_id} = payload
+      ) do
     headers = build_headers(token)
 
     body = payload.body |> Jason.encode!()
 
-    PomeloEx.Client.request(:patch, "/lending/v1/products/#{product_id}/segments/#{segment_id}", body, headers)
+    PomeloEx.Client.request(
+      :patch,
+      "/lending/v1/products/#{product_id}/segments/#{segment_id}",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

@@ -52,5 +52,7 @@ defmodule PomeloEx.Cards.Credits.DebtSaleToBanks do
   Webhook: Debt Cancellation
   Notifies when a debt is cancelled due to account closure.
   """
-  defdelegate debt_cancellation_notification(payload), to: DebtCancellationNotification, as: :execute
+  defdelegate debt_cancellation_notification(payload),
+    to: DebtCancellationNotification,
+    as: :execute
 end

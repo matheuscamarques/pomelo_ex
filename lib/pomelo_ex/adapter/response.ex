@@ -1,4 +1,5 @@
 defmodule PomeloEx.Adapter.Response do
+  @moduledoc false
   defstruct [:status, :body, :headers]
 
   @type t :: %__MODULE__{

@@ -3,13 +3,19 @@ defmodule PomeloEx.Cards.Credits.CreditLines.SimulateExpirationDateUpdate do
 
   alias PomeloEx.Types.Cards.Credits.CreditLines.SimulateExpirationDateUpdateType
 
-  def execute(%SimulateExpirationDateUpdateType{token: token, credit_line_id: credit_line_id} = payload) do
-
+  def execute(
+        %SimulateExpirationDateUpdateType{token: token, credit_line_id: credit_line_id} = payload
+      ) do
     headers = build_headers(token)
 
     body = payload.body |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, "/lending/v1/credit-lines/#{credit_line_id}/config/due-date/simulation", body, headers)
+    PomeloEx.Client.request(
+      :post,
+      "/lending/v1/credit-lines/#{credit_line_id}/config/due-date/simulation",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

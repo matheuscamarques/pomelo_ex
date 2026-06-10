@@ -1,4 +1,5 @@
 defmodule PomeloEx.Adapter.HTTPoison do
+  @moduledoc false
   @behaviour PomeloEx.Adapter
 
   @impl true

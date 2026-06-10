@@ -4,7 +4,6 @@ defmodule PomeloEx.Cards.Credits.CreditLines.CreateCreditLine do
   alias PomeloEx.Types.Cards.Credits.CreditLines.CreateCreditLineType
 
   def execute(%CreateCreditLineType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

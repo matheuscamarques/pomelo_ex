@@ -12,8 +12,7 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockList do
       |> Map.drop([:token, :type])
       |> Enum.filter(fn {_k, v} -> not is_nil(v) end)
       |> Enum.map(&format_pair/1)
-      |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
-      |> Enum.join("&")
+      |> Enum.map_join("&", fn {k, v} -> "#{k}=#{v}" end)
 
     PomeloEx.Client.request(:get, "/fraud/search/#{type}/block?#{params}", nil, headers)
   end

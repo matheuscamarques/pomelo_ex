@@ -5,7 +5,6 @@ defmodule PomeloEx.General.Company.CreateCompany do
   alias PomeloEx.Types.General.Companies.CreateCompanyType
 
   def execute(%CreateCompanyType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

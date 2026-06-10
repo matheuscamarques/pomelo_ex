@@ -9,7 +9,11 @@ defmodule PomeloEx.Cards.Credits.AvailablePlans.GetRefinancingPlansTest do
     payload = AvailablePlansFixtures.get_refinancing_plans_request()
 
     expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
-      assert String.contains?(url, "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/refinancing-plans/")
+      assert String.contains?(
+               url,
+               "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/refinancing-plans/"
+             )
+
       assert String.contains?(url, "filter[status]=OPEN")
       assert String.contains?(url, "page[number]=0")
       assert String.contains?(url, "page[size]=10")
@@ -25,6 +29,8 @@ defmodule PomeloEx.Cards.Credits.AvailablePlans.GetRefinancingPlansTest do
 
     body = Jason.decode!(response.body)
     assert length(body["data"]) == 1
-    assert body["data"] |> List.first() |> Map.get("credit_line_id") == "lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe"
+
+    assert body["data"] |> List.first() |> Map.get("credit_line_id") ==
+             "lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe"
   end
 end

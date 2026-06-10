@@ -9,10 +9,11 @@ defmodule PomeloEx.Fraud.TransactionalBlock.GetBlockListTest do
     payload = TransactionalBlockFixtures.get_block_list_request()
 
     expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
-      assert String.starts_with?(url,
+      assert String.starts_with?(
+               url,
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/search/merchant/block?"
-      )
+             )
 
       assert String.contains?(url, "filter[type]=id")
       assert String.contains?(url, "page[size]=10")

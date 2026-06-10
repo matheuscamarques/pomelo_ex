@@ -4,7 +4,6 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeP2PTransactio
   alias PomeloEx.Types.DigitalAccounts.DigitalMovementsAndP2P.AuthorizeP2PTransactionType
 
   def execute(%AuthorizeP2PTransactionType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

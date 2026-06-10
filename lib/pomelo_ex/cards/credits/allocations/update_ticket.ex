@@ -7,7 +7,12 @@ defmodule PomeloEx.Cards.Credits.Allocations.UpdateTicket do
     headers = build_headers(token)
     body = payload.body |> Jason.encode!()
 
-    PomeloEx.Client.request(:patch, "/lending/v1/payment-requests/#{credit_line_id}", body, headers)
+    PomeloEx.Client.request(
+      :patch,
+      "/lending/v1/payment-requests/#{credit_line_id}",
+      body,
+      headers
+    )
   end
 
   defp build_headers(token) do

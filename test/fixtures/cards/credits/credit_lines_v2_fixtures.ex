@@ -26,7 +26,9 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2Fixtures do
         "credit_card" => %{
           "book_model" => "REVOLVING",
           "installments" => %{"max_installments" => 12},
-          "pricing" => %{"rates" => [%{"kind" => "FINANCING", "application" => %{"percentage" => "15.00"}}]}
+          "pricing" => %{
+            "rates" => [%{"kind" => "FINANCING", "application" => %{"percentage" => "15.00"}}]
+          }
         }
       }
     }
@@ -183,7 +185,9 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2Fixtures do
       body: %{
         "name" => "Premium Segment",
         "credit_card" => %{
-          "pricing" => %{"rates" => [%{"kind" => "FINANCING", "application" => %{"percentage" => "12.00"}}]},
+          "pricing" => %{
+            "rates" => [%{"kind" => "FINANCING", "application" => %{"percentage" => "12.00"}}]
+          },
           "minimum_payment" => %{"type" => "PERCENTAGE", "value" => "15.00"}
         }
       }
@@ -270,7 +274,11 @@ defmodule PomeloEx.Cards.Credits.CreditLinesV2Fixtures do
         "user_id" => "usr-v2-user-id",
         "product_id" => "lpr-v2-product-id",
         "person_type" => "NATURAL",
-        "limit" => %{"type" => "CREDIT", "single_payment" => 50000, "cash_advance_percentage" => 10},
+        "limit" => %{
+          "type" => "CREDIT",
+          "single_payment" => 50000,
+          "cash_advance_percentage" => 10
+        },
         "lifecycle" => %{"offer" => %{"start_date" => "2024-01-01", "end_date" => "2025-01-01"}},
         "billing_cycles" => %{"billing_date_strategy" => "FIXED", "due_day" => 15}
       }

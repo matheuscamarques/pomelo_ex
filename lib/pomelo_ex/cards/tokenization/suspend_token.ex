@@ -15,7 +15,8 @@ defmodule PomeloEx.Cards.Tokenization.SuspendToken do
       |> Enum.into(%{})
       |> Jason.encode!()
 
-    PomeloEx.Client.request(:post, 
+    PomeloEx.Client.request(
+      :post,
       "/tokenization/v1/tokens/#{external_token_id}/suspension",
       body,
       headers

@@ -4,7 +4,6 @@ defmodule PomeloEx.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalance d
   alias PomeloEx.Types.DigitalAccounts.DigitalMovementsAndP2P.UpdateAccountBalanceType
 
   def execute(%UpdateAccountBalanceType{token: token, account_id: account_id} = payload) do
-
     headers = build_headers(token)
 
     body =

@@ -6,7 +6,12 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.GetSegment do
   def execute(%GetSegmentType{token: token, product_id: product_id, segment_id: segment_id}) do
     headers = build_headers(token)
 
-    PomeloEx.Client.request(:get, "/lending/v1/products/#{product_id}/segments/#{segment_id}", nil, headers)
+    PomeloEx.Client.request(
+      :get,
+      "/lending/v1/products/#{product_id}/segments/#{segment_id}",
+      nil,
+      headers
+    )
   end
 
   defp build_headers(token) do

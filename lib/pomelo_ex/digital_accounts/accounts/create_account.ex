@@ -4,7 +4,6 @@ defmodule PomeloEx.DigitalAccounts.Accounts.CreateAccount do
   alias PomeloEx.Types.DigitalAccounts.Accounts.CreateAccountType
 
   def execute(%CreateAccountType{token: token} = payload) do
-
     headers = build_headers(token)
 
     body =

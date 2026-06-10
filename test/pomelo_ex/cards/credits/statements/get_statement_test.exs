@@ -9,7 +9,11 @@ defmodule PomeloEx.Cards.Credits.Statements.GetStatementTest do
     payload = StatementsFixtures.get_statement_request()
 
     expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
-      assert String.contains?(url, "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/lst-2Lm1ZH2rmhP6F1NRRBRnpUwswwP")
+      assert String.contains?(
+               url,
+               "/lending/v1/credit-lines/lcr-2HMvRUOZ9C3fbsrkdeyOexAmpLe/statements/lst-2Lm1ZH2rmhP6F1NRRBRnpUwswwP"
+             )
+
       assert String.contains?(url, "extended=pdf_url")
 
       {:ok,

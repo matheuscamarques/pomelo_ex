@@ -1,4 +1,5 @@
 defmodule PomeloEx.Adapter do
+  @moduledoc false
   @callback request(
               method :: atom(),
               url :: String.t(),

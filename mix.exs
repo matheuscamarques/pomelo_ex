@@ -27,7 +27,7 @@ defmodule PomeloEx.MixProject do
 
   defp groups_for_modules do
     [
-      "General": ~r/^PomeloEx\.General/,
+      General: ~r/^PomeloEx\.General/,
       "Identity (KYC/KYB)": ~r/^PomeloEx\.Identity/,
       "Cards - Issuing": ~r/^PomeloEx\.Cards\.Issuing/,
       "Cards - Processing": ~r/^PomeloEx\.Cards\.Processing/,
@@ -36,11 +36,10 @@ defmodule PomeloEx.MixProject do
       "Cards - Credits": ~r/^PomeloEx\.Cards\.Credits/,
       "Cards - Associations": ~r/^PomeloEx\.Cards\.Associations/,
       "Digital Accounts": ~r/^PomeloEx\.DigitalAccounts/,
-      "Finance": ~r/^PomeloEx\.Finance/,
-      "Fraud": ~r/^PomeloEx\.Fraud/,
-
-      "Loyalty": ~r/^PomeloEx\.Loyalty/,
-      "Types": ~r/^PomeloEx\.Types/
+      Finance: ~r/^PomeloEx\.Finance/,
+      Fraud: ~r/^PomeloEx\.Fraud/,
+      Loyalty: ~r/^PomeloEx\.Loyalty/,
+      Types: ~r/^PomeloEx\.Types/
     ]
   end
 

@@ -9,10 +9,11 @@ defmodule PomeloEx.Fraud.SoftBlock.GetSoftBlockListTest do
     payload = SoftBlockFixtures.get_soft_block_list_request()
 
     expect(PomeloEx.Adapter.Mock, :request, fn :get, url, _body, _headers ->
-      assert String.starts_with?(url,
+      assert String.starts_with?(
+               url,
                Application.get_env(:pomelo_ex, :url) <>
                  "/fraud/search/merchant/softblock?"
-      )
+             )
 
       assert String.contains?(url, "page[size]=10")
       assert String.contains?(url, "page[number]=0")

@@ -27,6 +27,7 @@ defmodule PomeloEx.Cards.Credits.CreditProduct.GetProducts do
 
   defp format_pair({:page_number, value}), do: {"page[number]", to_string(value)}
   defp format_pair({:page_size, value}), do: {"page[size]", to_string(value)}
+
   defp format_pair({key, value}) do
     key = key |> Atom.to_string() |> String.replace("_", ".")
     {key, to_string(value)}

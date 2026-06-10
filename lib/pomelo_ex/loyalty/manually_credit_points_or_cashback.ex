@@ -3,8 +3,9 @@ defmodule PomeloEx.Loyalty.ManuallyCreditPointsOrCashback do
 
   alias PomeloEx.Types.Loyalty.ManuallyCreditPointsOrCashbackType
 
-  def execute(%ManuallyCreditPointsOrCashbackType{token: token, account_type: account_type} = payload) do
-
+  def execute(
+        %ManuallyCreditPointsOrCashbackType{token: token, account_type: account_type} = payload
+      ) do
     headers = build_headers(token)
 
     body =

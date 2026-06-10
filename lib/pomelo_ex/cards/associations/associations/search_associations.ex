@@ -12,8 +12,7 @@ defmodule PomeloEx.Cards.Associations.Associations.SearchAssociations do
       |> Map.delete(:token)
       |> Enum.filter(fn {_k, v} -> not is_nil(v) end)
       |> Enum.map(&format_pair/1)
-      |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
-      |> Enum.join("&")
+      |> Enum.map_join("&", fn {k, v} -> "#{k}=#{v}" end)
 
     PomeloEx.Client.request(:get, "/cards/associations/v1/?#{params}", nil, headers)
   end
