@@ -10,7 +10,8 @@ defmodule PomeloEx.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "PomeloEx",
-      description: "An Elixir client library for the Pomelo API — the Latin American fintech platform for card issuing, digital accounts, KYC/KYB, fraud prevention, loyalty, and credit products.",
+      description:
+        "An Elixir client library for the Pomelo API — the Latin American fintech platform for card issuing, digital accounts, KYC/KYB, fraud prevention, loyalty, and credit products.",
       source_url: "https://github.com/matheuscamarques/pomelo_ex",
       homepage_url: "https://developers.pomelo.la",
       package: package(),
